@@ -28,7 +28,7 @@ const pillars = [
 
 export default function About() {
   return (
-    <section id="about" className="py-32 px-6 md:px-12 relative">
+    <section id="about" className="py-24 px-6 md:px-12 relative border-t border-neutral-800">
       {/* Large decorative number */}
       <div className="absolute top-0 left-0 text-[30vw] font-display text-[#141414] leading-none pointer-events-none select-none hidden lg:block">
         02
@@ -41,7 +41,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-24"
+          className="mb-16"
         >
           <div className="flex items-center gap-6 mb-8">
             <div className="accent-bar" />
@@ -55,8 +55,8 @@ export default function About() {
           </h2>
         </motion.div>
 
-        {/* Pillars grid */}
-        <div className="grid md:grid-cols-3 gap-4">
+        {/* Pillars grid - tight/flush layout */}
+        <div className="grid md:grid-cols-3">
           {pillars.map((pillar, i) => (
             <motion.article
               key={pillar.number}
@@ -64,7 +64,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="card-brutal p-8 md:p-12 group hover:bg-[#111]"
+              className="border border-neutral-800 p-8 md:p-12 group hover:bg-[#111] hover:border-[#FF5722] transition-all"
             >
               <span className="font-mono text-6xl md:text-7xl text-neutral-800 group-hover:text-[#FF5722] transition-colors">
                 {pillar.number}
@@ -88,7 +88,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-32 border-l-2 border-[#FF5722] pl-8 md:pl-12"
+          className="mt-20 border-l-2 border-[#FF5722] pl-8 md:pl-12"
         >
           <blockquote className="text-display-sm italic text-neutral-300">
             &ldquo;If you&apos;re building something world-class, you belong
@@ -102,7 +102,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-32 grid md:grid-cols-2 gap-12 md:gap-24"
+          className="mt-20 grid md:grid-cols-2 gap-8 md:gap-16"
         >
           <div>
             <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-4">

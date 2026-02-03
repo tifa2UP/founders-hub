@@ -55,7 +55,7 @@ const tiers = [
 
 export default function JoinUs() {
   return (
-    <section id="join" className="py-32 px-6 md:px-12 relative">
+    <section id="join" className="py-24 px-6 md:px-12 relative border-t border-neutral-800">
       {/* Large decorative number */}
       <div className="absolute top-0 left-0 text-[30vw] font-display text-[#141414] leading-none pointer-events-none select-none hidden lg:block">
         04
@@ -68,7 +68,7 @@ export default function JoinUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 md:mb-24"
+          className="mb-12"
         >
           <div className="flex items-center gap-6 mb-8">
             <div className="accent-bar" />
@@ -81,8 +81,8 @@ export default function JoinUs() {
           </h2>
         </motion.div>
 
-        {/* Tiers */}
-        <div className="grid md:grid-cols-3 gap-6">
+        {/* Tiers - flush layout */}
+        <div className="grid md:grid-cols-3">
           {tiers.map((tier, i) => (
             <motion.div
               key={tier.name}
@@ -100,10 +100,10 @@ export default function JoinUs() {
                 </div>
               )}
               <div
-                className={`h-full p-8 md:p-10 ${
+                className={`h-full p-8 md:p-10 border border-neutral-800 ${
                   tier.highlight
-                    ? "bg-[#FF5722] text-[#0a0a0a]"
-                    : "card-brutal bg-[#0a0a0a]"
+                    ? "bg-[#FF5722] text-[#0a0a0a] border-[#FF5722]"
+                    : "hover:border-[#FF5722] hover:bg-[#111] transition-all"
                 }`}
               >
                 <h3 className="font-heading font-bold text-2xl mb-2">
@@ -169,7 +169,7 @@ export default function JoinUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-32 text-center"
+          className="mt-20 text-center"
         >
           <h3 className="text-display-sm mb-8">
             Ready to <span className="italic">ship</span>?

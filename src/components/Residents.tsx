@@ -30,7 +30,7 @@ const residents = [
 
 export default function Residents() {
   return (
-    <section id="residents" className="py-32 px-6 md:px-12 relative">
+    <section id="residents" className="py-24 px-6 md:px-12 relative border-t border-neutral-800">
       {/* Large decorative number */}
       <div className="absolute top-0 right-0 text-[30vw] font-display text-[#141414] leading-none pointer-events-none select-none hidden lg:block">
         03
@@ -43,7 +43,7 @@ export default function Residents() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 md:mb-24"
+          className="mb-12"
         >
           <div className="flex items-center gap-6 mb-8">
             <div className="accent-bar" />
@@ -62,8 +62,8 @@ export default function Residents() {
           </div>
         </motion.div>
 
-        {/* Residents grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Residents grid - tight/flush layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {residents.map((resident, index) => (
             <motion.article
               key={resident.id}
@@ -71,7 +71,7 @@ export default function Residents() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: (index % 8) * 0.05 }}
-              className="card-brutal p-6 group"
+              className="border border-neutral-800 p-6 group hover:border-[#FF5722] hover:bg-[#111] transition-all"
             >
               {/* Number */}
               <span className="font-mono text-xs text-neutral-700 group-hover:text-[#FF5722] transition-colors">
