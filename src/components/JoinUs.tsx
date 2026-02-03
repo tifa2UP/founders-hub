@@ -68,7 +68,7 @@ export default function JoinUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-12"
+          className="mb-32"
         >
           <div className="flex items-center gap-6 mb-8">
             <div className="accent-bar" />
