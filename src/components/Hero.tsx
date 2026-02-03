@@ -1,121 +1,112 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDownRight } from "lucide-react";
 import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden tech-grid">
-      {/* Gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-[#FF6B35]/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-[#FF6B35]/10 rounded-full blur-[100px] animate-pulse delay-1000" />
+    <section className="relative min-h-screen flex flex-col bg-grid">
+      {/* Large decorative number */}
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 text-[40vw] font-display text-[#141414] leading-none pointer-events-none select-none hidden lg:block">
+        01
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center">
-        {/* Badge */}
+      {/* Main content */}
+      <div className="flex-1 flex flex-col justify-end px-6 md:px-12 pb-12 pt-32">
+        {/* Top label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 mb-8"
+          className="mb-8"
         >
-          <span className="px-4 py-2 glass rounded-full text-sm font-mono text-zinc-400">
-            <span className="inline-block w-2 h-2 bg-[#FF6B35] rounded-full mr-2 animate-pulse" />
-            OSLO, NORWAY
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
+            Oslo, Norway — Est. 2024
           </span>
         </motion.div>
 
         {/* Main headline */}
+        <div className="relative">
+          <motion.h1
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-display mb-4"
+          >
+            <span className="block">Founders</span>
+          </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-display text-stroke-accent"
+          >
+            <span className="block">Hub</span>
+          </motion.h1>
+        </div>
+
+        {/* Subheadline + CTA row */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-6"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-12 flex flex-col md:flex-row md:items-end justify-between gap-8"
         >
-          <h1 className="text-display uppercase">
-            <span className="block text-white">Founders</span>
-            <span className="block gradient-text text-glow">Hub</span>
-          </h1>
-        </motion.div>
+          <div className="max-w-md">
+            <p className="text-lg md:text-xl text-neutral-400 leading-relaxed font-heading">
+              For the wildly ambitious building{" "}
+              <span className="text-[#FF5722]">global AI impact</span>.
+              Oslo&apos;s home for builders who ship fast.
+            </p>
+          </div>
 
-        {/* Subheadline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto mb-12 leading-relaxed"
-        >
-          For the wildly ambitious
-          <br />
-          <span className="text-white">building global AI impact</span>
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <Link
-            href="#join"
-            className="group relative px-8 py-4 bg-[#FF6B35] text-black font-bold text-lg rounded-full hover:bg-[#FF8555] transition-all glow-orange overflow-hidden"
-          >
-            <span className="relative z-10">Apply for Membership</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FF8555] to-[#FF6B35] opacity-0 group-hover:opacity-100 transition-opacity" />
-          </Link>
-          <Link
-            href="#about"
-            className="px-8 py-4 glass glass-hover rounded-full font-semibold text-zinc-300 hover:text-white transition-all"
-          >
-            Learn More
-          </Link>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="mt-20 grid grid-cols-3 gap-8 max-w-xl mx-auto"
-        >
-          {[
-            { value: "25+", label: "Desks" },
-            { value: "AI", label: "Focus" },
-            { value: "24/7", label: "Access" },
-          ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-[#FF6B35] font-mono">
-                {stat.value}
-              </div>
-              <div className="text-xs text-zinc-500 uppercase tracking-wider mt-1">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+          <div className="flex items-center gap-6">
+            <Link href="#join" className="btn-primary">
+              Apply Now
+              <ArrowDownRight className="w-4 h-4" />
+            </Link>
+            <Link href="#about" className="btn-outline">
+              Learn More
+            </Link>
+          </div>
         </motion.div>
       </div>
+
+      {/* Bottom marquee */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="border-t border-neutral-800 overflow-hidden py-4"
+      >
+        <div className="animate-marquee whitespace-nowrap flex">
+          {[...Array(4)].map((_, i) => (
+            <span
+              key={i}
+              className="font-mono text-sm uppercase tracking-wider text-neutral-600 mx-8"
+            >
+              Ship Fast • Build Global • AI Builders • No Equity • No Programs • Just Execution •
+            </span>
+          ))}
+        </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        transition={{ delay: 1 }}
+        className="absolute bottom-32 right-6 md:right-12 hidden md:flex flex-col items-center gap-4"
       >
+        <span className="vertical-text font-mono text-xs uppercase tracking-wider text-neutral-500">
+          Scroll
+        </span>
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2 text-zinc-500"
-        >
-          <span className="text-xs font-mono uppercase tracking-wider">
-            Scroll
-          </span>
-          <ArrowDown size={16} />
-        </motion.div>
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="w-px h-16 bg-gradient-to-b from-[#FF5722] to-transparent"
+        />
       </motion.div>
     </section>
   );

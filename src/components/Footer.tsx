@@ -2,102 +2,119 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Linkedin, Mail, MapPin } from "lucide-react";
+import { Linkedin, Mail, MapPin, ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="py-16 border-t border-white/5">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-[#FF6B35] flex items-center justify-center font-bold text-black">
-                FH
-              </div>
-              <span className="text-xl font-bold text-white">Founders Hub</span>
-            </Link>
-            <p className="text-zinc-500 max-w-sm leading-relaxed">
-              Oslo&apos;s home for AI builders. For the wildly ambitious
-              building global AI impact.
-            </p>
-            <div className="flex items-center gap-4 mt-6">
-              <Link
-                href="https://linkedin.com/company/foundershub-oslo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 glass glass-hover rounded-full flex items-center justify-center text-zinc-400 hover:text-[#0A66C2] transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={18} />
+    <footer className="border-t border-neutral-800">
+      {/* Main footer */}
+      <div className="px-6 md:px-12 py-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-12 gap-12 md:gap-8">
+            {/* Brand */}
+            <div className="md:col-span-5">
+              <Link href="/" className="inline-block mb-6">
+                <span className="text-4xl font-heading font-bold tracking-tight">
+                  FH
+                </span>
               </Link>
-              <Link
-                href="mailto:hello@foundershub.no"
-                className="w-10 h-10 glass glass-hover rounded-full flex items-center justify-center text-zinc-400 hover:text-[#FF6B35] transition-colors"
-                aria-label="Email"
-              >
-                <Mail size={18} />
-              </Link>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">
-              Navigation
-            </h4>
-            <ul className="space-y-3">
-              {[
-                { label: "About", href: "#about" },
-                { label: "Residents", href: "#residents" },
-                { label: "Join Us", href: "#join" },
-              ].map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-zinc-500 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">
-              Location
-            </h4>
-            <div className="flex items-start gap-3 text-zinc-500">
-              <MapPin size={18} className="flex-shrink-0 mt-1" />
-              <p>
-                Mesh Youngstorget
-                <br />
-                Top Floor
-                <br />
-                Oslo, Norway
+              <p className="text-neutral-500 max-w-sm leading-relaxed mb-8">
+                Oslo&apos;s home for AI builders. For the wildly ambitious
+                building global AI impact.
               </p>
+              <div className="flex items-center gap-4">
+                <Link
+                  href="https://linkedin.com/company/foundershub-oslo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 border border-neutral-800 flex items-center justify-center text-neutral-500 hover:text-white hover:border-[#FF5722] transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin size={20} />
+                </Link>
+                <Link
+                  href="mailto:hello@foundershub.no"
+                  className="w-12 h-12 border border-neutral-800 flex items-center justify-center text-neutral-500 hover:text-white hover:border-[#FF5722] transition-colors"
+                  aria-label="Email"
+                >
+                  <Mail size={20} />
+                </Link>
+              </div>
+            </div>
+
+            {/* Navigation */}
+            <div className="md:col-span-2">
+              <h4 className="font-heading font-bold text-sm uppercase tracking-wider mb-6">
+                Navigate
+              </h4>
+              <ul className="space-y-4">
+                {[
+                  { label: "About", href: "#about" },
+                  { label: "Residents", href: "#residents" },
+                  { label: "Join Us", href: "#join" },
+                ].map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-neutral-500 hover:text-white transition-colors link-hover"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Location */}
+            <div className="md:col-span-3">
+              <h4 className="font-heading font-bold text-sm uppercase tracking-wider mb-6">
+                Location
+              </h4>
+              <div className="flex items-start gap-3 text-neutral-500">
+                <MapPin size={18} className="flex-shrink-0 mt-1" />
+                <p>
+                  Mesh Youngstorget
+                  <br />
+                  Top Floor
+                  <br />
+                  Oslo, Norway
+                </p>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="md:col-span-2">
+              <h4 className="font-heading font-bold text-sm uppercase tracking-wider mb-6">
+                Ready?
+              </h4>
+              <Link
+                href="#join"
+                className="inline-flex items-center gap-2 text-[#FF5722] font-heading font-bold text-sm uppercase tracking-wider hover:gap-4 transition-all"
+              >
+                Apply Now
+                <ArrowUpRight size={16} />
+              </Link>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4"
-        >
-          <p className="text-sm text-zinc-600">
-            &copy; {new Date().getFullYear()} Founders Hub Oslo. All rights
-            reserved.
+      {/* Bottom bar */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="border-t border-neutral-800 px-6 md:px-12 py-6"
+      >
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-neutral-600 font-mono">
+            &copy; {new Date().getFullYear()} Founders Hub Oslo
           </p>
-          <p className="text-xs text-zinc-700 font-mono">
+          <p className="text-xs text-neutral-700 font-mono uppercase tracking-wider">
             Ship fast. Build global.
           </p>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </footer>
   );
 }

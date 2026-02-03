@@ -1,19 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, Sparkles, Users, Globe } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 const tiers = [
   {
     name: "Resident",
-    icon: Sparkles,
-    description:
-      "Full access to everything. 24/7 office, direct access to unicorn founders, warm intros to investors.",
-    price: {
-      sponsored: "Sponsored",
-      paid: "1,500 NOK/mo",
-    },
+    price: "Sponsored",
+    priceAlt: "or 1,500 NOK/mo",
+    description: "Full access. 24/7 office, unicorn founders, investor intros.",
     features: [
       "24/7 office access",
       "Direct access to unicorn founders",
@@ -23,17 +19,13 @@ const tiers = [
     ],
     highlight: true,
     cta: "Apply for Residency",
-    note: "10 fully sponsored desks + 15 half-sponsored desks available",
+    href: "mailto:hello@foundershub.no?subject=Residency Application",
   },
   {
     name: "Member",
-    icon: Users,
-    description:
-      "Norway's top AI founders. Priority event invitations and exclusive resources.",
-    price: {
-      sponsored: "Free",
-      paid: null,
-    },
+    price: "Free",
+    priceAlt: null,
+    description: "Norway's top AI founders. Priority events, exclusive resources.",
     features: [
       "Priority event invitations",
       "Exclusive WhatsApp group",
@@ -42,141 +34,129 @@ const tiers = [
     ],
     highlight: false,
     cta: "Apply for Membership",
-    note: "For active AI founders building ambitious projects",
+    href: "mailto:hello@foundershub.no?subject=Membership Application",
   },
   {
     name: "Community",
-    icon: Globe,
-    description:
-      "For aspiring founders and those interested in the AI ecosystem.",
-    price: {
-      sponsored: "Free",
-      paid: null,
-    },
+    price: "Free",
+    priceAlt: null,
+    description: "For aspiring founders interested in the AI ecosystem.",
     features: [
       "Access to larger events",
       "Meet residents & members",
       "Connect with AI founders",
-      "LinkedIn community updates",
+      "LinkedIn updates",
     ],
     highlight: false,
     cta: "Join Community",
-    note: "Follow us on LinkedIn and check our Luma calendar",
+    href: "https://linkedin.com/company/foundershub-oslo",
   },
 ];
 
 export default function JoinUs() {
   return (
-    <section id="join" className="py-32 relative">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="join" className="py-32 px-6 md:px-12 relative">
+      {/* Large decorative number */}
+      <div className="absolute top-0 left-0 text-[30vw] font-display text-[#141414] leading-none pointer-events-none select-none hidden lg:block">
+        04
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16 md:mb-24"
         >
-          <span className="text-xs font-mono text-[#FF6B35] uppercase tracking-wider">
-            Get Involved
-          </span>
-          <h2 className="text-headline mt-4 text-white">Join Us</h2>
-          <p className="mt-6 text-lg text-zinc-400 max-w-2xl mx-auto">
-            Three ways to be part of the community.
-          </p>
+          <div className="flex items-center gap-6 mb-8">
+            <div className="accent-bar" />
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
+              Get Involved
+            </span>
+          </div>
+          <h2 className="text-display-sm">
+            Join <span className="italic text-[#FF5722]">Us</span>
+          </h2>
         </motion.div>
 
-        {/* Pricing tiers */}
+        {/* Tiers */}
         <div className="grid md:grid-cols-3 gap-6">
           {tiers.map((tier, i) => (
             <motion.div
               key={tier.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className={`relative ${tier.highlight ? "md:-mt-4 md:mb-4" : ""}`}
+              className={`relative ${tier.highlight ? "md:-mt-8 md:mb-8" : ""}`}
             >
               {tier.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                  <span className="px-3 py-1 bg-[#FF6B35] text-black text-xs font-bold rounded-full">
-                    MOST POPULAR
+                <div className="absolute -top-4 left-0 z-10">
+                  <span className="bg-[#FF5722] text-[#0a0a0a] font-heading font-bold text-xs uppercase tracking-wider px-4 py-2">
+                    Most Popular
                   </span>
                 </div>
               )}
               <div
-                className={`glass rounded-2xl p-8 h-full transition-all duration-300 ${
+                className={`h-full p-8 md:p-10 ${
                   tier.highlight
-                    ? "border-[#FF6B35]/50 bg-[#FF6B35]/5"
-                    : "glass-hover"
+                    ? "bg-[#FF5722] text-[#0a0a0a]"
+                    : "card-brutal bg-[#0a0a0a]"
                 }`}
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <div
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      tier.highlight ? "bg-[#FF6B35]" : "bg-[#FF6B35]/10"
-                    }`}
-                  >
-                    <tier.icon
-                      className={`w-5 h-5 ${
-                        tier.highlight ? "text-black" : "text-[#FF6B35]"
-                      }`}
-                    />
-                  </div>
-                  <h3 className="text-xl font-bold text-white">{tier.name}</h3>
-                </div>
-
-                <p className="text-zinc-400 text-sm mb-6 min-h-[60px]">
-                  {tier.description}
-                </p>
-
-                {/* Price */}
+                <h3 className="font-heading font-bold text-2xl mb-2">
+                  {tier.name}
+                </h3>
                 <div className="mb-6">
-                  <div className="text-2xl font-bold text-white">
-                    {tier.price.sponsored}
-                  </div>
-                  {tier.price.paid && (
-                    <div className="text-sm text-zinc-500">
-                      or {tier.price.paid}
-                    </div>
+                  <span className="text-4xl font-display">{tier.price}</span>
+                  {tier.priceAlt && (
+                    <span
+                      className={`block text-sm mt-1 ${
+                        tier.highlight ? "text-[#0a0a0a]/60" : "text-neutral-600"
+                      }`}
+                    >
+                      {tier.priceAlt}
+                    </span>
                   )}
                 </div>
-
-                {/* Features */}
-                <ul className="space-y-3 mb-6">
+                <p
+                  className={`text-sm mb-8 ${
+                    tier.highlight ? "text-[#0a0a0a]/80" : "text-neutral-500"
+                  }`}
+                >
+                  {tier.description}
+                </p>
+                <ul className="space-y-3 mb-8">
                   {tier.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3">
-                      <Check className="w-4 h-4 text-[#FF6B35] flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-zinc-300">{feature}</span>
+                    <li
+                      key={feature}
+                      className={`flex items-center gap-3 text-sm ${
+                        tier.highlight ? "text-[#0a0a0a]" : "text-neutral-400"
+                      }`}
+                    >
+                      <span
+                        className={`w-1.5 h-1.5 ${
+                          tier.highlight ? "bg-[#0a0a0a]" : "bg-[#FF5722]"
+                        }`}
+                      />
+                      {feature}
                     </li>
                   ))}
                 </ul>
-
-                {/* Note */}
-                <p className="text-xs text-zinc-600 mb-6 min-h-[32px]">
-                  {tier.note}
-                </p>
-
-                {/* CTA */}
                 <Link
-                  href={
-                    tier.name === "Community"
-                      ? "https://linkedin.com/company/foundershub-oslo"
-                      : "#contact"
-                  }
+                  href={tier.href}
                   target={tier.name === "Community" ? "_blank" : undefined}
-                  rel={
-                    tier.name === "Community"
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  className={`block w-full py-3 rounded-full text-center font-semibold transition-all ${
+                  rel={tier.name === "Community" ? "noopener noreferrer" : undefined}
+                  className={`inline-flex items-center gap-2 font-heading font-bold text-sm uppercase tracking-wider transition-all ${
                     tier.highlight
-                      ? "bg-[#FF6B35] text-black hover:bg-[#FF8555] glow-orange"
-                      : "glass glass-hover text-white"
+                      ? "text-[#0a0a0a] border-b-2 border-[#0a0a0a] hover:border-b-4"
+                      : "text-white border-b-2 border-white hover:border-[#FF5722] hover:text-[#FF5722]"
                   }`}
                 >
                   {tier.cta}
+                  <ArrowUpRight className="w-4 h-4" />
                 </Link>
               </div>
             </motion.div>
@@ -185,28 +165,27 @@ export default function JoinUs() {
 
         {/* Bottom CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-20 text-center"
+          className="mt-32 text-center"
         >
-          <div className="glass rounded-2xl p-12 max-w-3xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Ready to build with the best?
-            </h3>
-            <p className="text-zinc-400 mb-8">
-              Apply now. If you&apos;re building something that matters and want
-              to be around others doing the same, the sooner you&apos;re in, the
-              sooner you&apos;re building with the best.
-            </p>
-            <Link
-              href="mailto:hello@foundershub.no"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#FF6B35] text-black font-bold text-lg rounded-full hover:bg-[#FF8555] transition-all glow-orange"
-            >
-              Apply for Membership
-            </Link>
-          </div>
+          <h3 className="text-display-sm mb-8">
+            Ready to <span className="italic">ship</span>?
+          </h3>
+          <p className="text-neutral-500 max-w-xl mx-auto mb-12 text-lg">
+            If you&apos;re building something that matters and want to be around
+            others doing the same, apply now. The sooner you&apos;re in, the
+            sooner you&apos;re building with the best.
+          </p>
+          <Link
+            href="mailto:hello@foundershub.no?subject=Application"
+            className="btn-primary text-lg px-12 py-5"
+          >
+            Apply Now
+            <ArrowUpRight className="w-5 h-5" />
+          </Link>
         </motion.div>
       </div>
     </section>
