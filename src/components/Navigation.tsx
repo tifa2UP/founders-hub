@@ -19,7 +19,7 @@ export default function Navigation() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 z-50 mix-blend-difference"
+        className="fixed top-0 left-0 right-0 z-50"
       >
         <nav className="flex items-center justify-between px-6 md:px-12 py-6">
           {/* Logo */}
@@ -49,7 +49,7 @@ export default function Navigation() {
           {/* CTA */}
           <Link
             href="#join"
-            className="hidden md:block text-sm font-heading font-bold uppercase tracking-wider text-[#0a0a0a] bg-white px-6 py-3 hover:bg-[#FF5722] transition-colors"
+            className="hidden md:block text-sm font-heading font-bold uppercase tracking-wider text-[#0a0a0a] bg-[#FF5722] px-6 py-3 hover:bg-white transition-colors"
           >
             Apply
           </Link>

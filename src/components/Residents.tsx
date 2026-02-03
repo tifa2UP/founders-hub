@@ -71,44 +71,51 @@ export default function Residents() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: (index % 8) * 0.05 }}
-              className="border border-neutral-800 p-6 group hover:border-[#FF5722] hover:bg-[#111] transition-all"
+              className="border border-neutral-800 p-0 group hover:border-[#FF5722] transition-all overflow-hidden"
             >
-              {/* Number */}
-              <span className="font-mono text-xs text-neutral-700 group-hover:text-[#FF5722] transition-colors">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-
-              {/* Content */}
-              <div className="mt-4">
-                <h3 className="font-heading font-bold text-lg text-white group-hover:text-[#FF5722] transition-colors">
-                  {resident.name}
-                </h3>
-                <p className="text-[#FF5722] text-sm font-heading mt-1">
-                  {resident.company}
-                </p>
-                <p className="text-neutral-600 text-xs mt-1">{resident.title}</p>
+              {/* Avatar - Full width hero image */}
+              <div className="relative aspect-square overflow-hidden">
+                <img
+                  src={`https://i.pravatar.cc/400?img=${resident.id + 10}`}
+                  alt={resident.name}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <span className="absolute top-3 left-3 font-mono text-xs text-white/50 group-hover:text-[#FF5722] transition-colors">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
               </div>
 
-              {/* Social links */}
-              <div className="flex items-center gap-4 mt-6 pt-4 border-t border-neutral-800">
-                <Link
-                  href={resident.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-600 hover:text-white transition-colors"
-                  aria-label={`${resident.name}'s LinkedIn`}
-                >
-                  <Linkedin size={16} />
-                </Link>
-                <Link
-                  href={resident.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-600 hover:text-white transition-colors"
-                  aria-label={`${resident.name}'s Twitter`}
-                >
-                  <Twitter size={16} />
-                </Link>
+              {/* Info */}
+              <div className="p-4">
+                <h3 className="font-heading font-bold text-base text-white group-hover:text-[#FF5722] transition-colors">
+                  {resident.name}
+                </h3>
+                <p className="text-[#FF5722] text-sm font-heading">
+                  {resident.company}
+                </p>
+                <p className="text-neutral-600 text-xs">{resident.title}</p>
+                {/* Social links */}
+                <div className="flex items-center gap-3 mt-2">
+                  <Link
+                    href={resident.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-neutral-600 hover:text-white transition-colors"
+                    aria-label={`${resident.name}'s LinkedIn`}
+                  >
+                    <Linkedin size={14} />
+                  </Link>
+                  <Link
+                    href={resident.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-neutral-600 hover:text-white transition-colors"
+                    aria-label={`${resident.name}'s Twitter`}
+                  >
+                    <Twitter size={14} />
+                  </Link>
+                </div>
               </div>
             </motion.article>
           ))}
