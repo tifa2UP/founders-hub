@@ -53,7 +53,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8 mt-4"
         >
-          <div className="max-w-md">
+          <div className="max-w-md mb-8 md:mb-0">
             <p className="text-lg md:text-xl text-neutral-400 leading-tight font-heading">
               For the wildly ambitious building{" "}
               <span className="text-[#FF5722]">global AI impact</span>.
