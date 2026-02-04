@@ -287,12 +287,7 @@ a {
   outline-offset: 2px;
 }
 
-/* Image grayscale hover */
+/* Image grayscale */
 .img-hover {
   filter: grayscale(100%);
-  transition: filter 0.4s ease;
-}
-
-.img-hover:hover {
-  filter: grayscale(0%);
 }

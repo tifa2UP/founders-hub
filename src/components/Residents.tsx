@@ -78,7 +78,7 @@ export default function Residents() {
                 <img
                   src={`https://i.pravatar.cc/400?img=${resident.id + 10}`}
                   alt={resident.name}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                  className="w-full h-full object-cover grayscale group-hover:scale-105 transition-all duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <span className="absolute top-3 left-3 font-mono text-xs text-white/50 group-hover:text-[#FF5722] transition-colors">
