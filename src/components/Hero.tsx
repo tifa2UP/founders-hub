@@ -22,7 +22,7 @@ export default function Hero() {
           className="mb-4"
         >
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
-            Oslo, Norway — Est. 2024
+            Oslo, Norway — Est. 2026
           </span>
         </motion.div>
 

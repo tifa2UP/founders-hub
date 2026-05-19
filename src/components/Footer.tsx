@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Linkedin, Mail, MapPin, ArrowUpRight } from "lucide-react";
+import { MapPin, ArrowUpRight } from "lucide-react";
+import { SiLinkedin } from "react-icons/si";
+import { HiOutlineMail } from "react-icons/hi";
 
 export default function Footer() {
   return (
@@ -30,14 +32,14 @@ export default function Footer() {
                   className="w-12 h-12 border border-neutral-800 flex items-center justify-center text-neutral-500 hover:text-white hover:border-[#FF5722] transition-colors"
                   aria-label="LinkedIn"
                 >
-                  <Linkedin size={20} />
+                  <SiLinkedin size={18} />
                 </Link>
                 <Link
                   href="mailto:hello@foundershub.no"
                   className="w-12 h-12 border border-neutral-800 flex items-center justify-center text-neutral-500 hover:text-white hover:border-[#FF5722] transition-colors"
                   aria-label="Email"
                 >
-                  <Mail size={20} />
+                  <HiOutlineMail size={20} />
                 </Link>
               </div>
             </div>

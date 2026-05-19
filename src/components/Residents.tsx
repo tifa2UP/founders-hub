@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Linkedin, Twitter } from "lucide-react";
+import { SiLinkedin, SiX } from "react-icons/si";
 import Link from "next/link";
 
 // Placeholder residents data
@@ -104,7 +104,7 @@ export default function Residents() {
                     className="text-neutral-600 hover:text-white transition-colors"
                     aria-label={`${resident.name}'s LinkedIn`}
                   >
-                    <Linkedin size={14} />
+                    <SiLinkedin size={12} />
                   </Link>
                   <Link
                     href={resident.twitter}
@@ -113,7 +113,7 @@ export default function Residents() {
                     className="text-neutral-600 hover:text-white transition-colors"
                     aria-label={`${resident.name}'s Twitter`}
                   >
-                    <Twitter size={14} />
+                    <SiX size={12} />
                   </Link>
                 </div>
               </div>
@@ -130,7 +130,7 @@ export default function Residents() {
           className="mt-16 flex flex-col md:flex-row items-center justify-between gap-8 pt-16 border-t border-neutral-800"
         >
           <p className="text-neutral-500 font-heading">
-            Want to join these exceptional builders?
+            Want to be one of us?
           </p>
           <Link href="#join" className="btn-primary">
             Apply for Residency
