@@ -62,7 +62,7 @@ export default function Hero() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Link href="#join" className="btn-primary">
+            <Link href="/apply" className="btn-primary">
               Apply Now
               <ArrowDownRight className="w-4 h-4" />
             </Link>

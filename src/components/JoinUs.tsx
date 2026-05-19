@@ -19,7 +19,7 @@ const tiers = [
     ],
     highlight: true,
     cta: "Apply for Residency",
-    href: "mailto:hello@foundershub.no?subject=Residency Application",
+    href: "/apply",
   },
   {
     name: "Member",
@@ -34,7 +34,7 @@ const tiers = [
     ],
     highlight: false,
     cta: "Apply for Membership",
-    href: "mailto:hello@foundershub.no?subject=Membership Application",
+    href: "/apply",
   },
   {
     name: "Community",

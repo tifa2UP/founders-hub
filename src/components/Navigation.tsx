@@ -48,7 +48,7 @@ export default function Navigation() {
 
           {/* CTA */}
           <Link
-            href="#join"
+            href="/apply"
             className="hidden md:block text-sm font-heading font-bold uppercase tracking-wider text-[#0a0a0a] bg-[#FF5722] px-6 py-3 hover:bg-white transition-colors"
           >
             Apply

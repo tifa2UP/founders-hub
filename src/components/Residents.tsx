@@ -115,7 +115,7 @@ export default function Residents() {
           <p className="text-neutral-500 font-heading">
             Want to join Founders Hub?
           </p>
-          <Link href="#join" className="btn-primary">
+          <Link href="/apply" className="btn-primary">
             Apply for Residency
           </Link>
         </motion.div>
