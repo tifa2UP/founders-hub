@@ -43,12 +43,8 @@ export default function Residents() {
         {/* Residents grid - tight/flush layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {residents.map((resident, index) => (
-            <motion.article
+            <article
               key={resident.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.4, delay: (index % 8) * 0.05 }}
               className="border border-neutral-800 p-0 group hover:border-[#FF5722] transition-all overflow-hidden"
             >
               {/* Avatar - Full width hero image */}
@@ -104,7 +100,7 @@ export default function Residents() {
                   </div>
                 )}
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
 
