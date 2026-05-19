@@ -130,7 +130,7 @@ export default function Residents() {
           className="mt-16 flex flex-col md:flex-row items-center justify-between gap-8 pt-16 border-t border-neutral-800"
         >
           <p className="text-neutral-500 font-heading">
-            Want to be one of us?
+            Want to join Founders Hub?
           </p>
           <Link href="#join" className="btn-primary">
             Apply for Residency
