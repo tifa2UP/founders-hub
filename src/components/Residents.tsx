@@ -3,30 +3,8 @@
 import { motion } from "framer-motion";
 import { SiLinkedin, SiX } from "react-icons/si";
 import Link from "next/link";
-
-// Placeholder residents data
-const residents = [
-  { id: 1, name: "Erik Nordmann", company: "NeuralForge AI", title: "CEO & Co-Founder", linkedin: "#", twitter: "#" },
-  { id: 2, name: "Sofia Larsen", company: "DataMind Labs", title: "Founder & CTO", linkedin: "#", twitter: "#" },
-  { id: 3, name: "Magnus Olsen", company: "AutoScale", title: "Co-Founder", linkedin: "#", twitter: "#" },
-  { id: 4, name: "Ingrid Berg", company: "VoiceFlow AI", title: "CEO", linkedin: "#", twitter: "#" },
-  { id: 5, name: "Anders Haugen", company: "Codex Intelligence", title: "Founder", linkedin: "#", twitter: "#" },
-  { id: 6, name: "Emilie Strand", company: "HealthPredict", title: "CEO & Founder", linkedin: "#", twitter: "#" },
-  { id: 7, name: "Henrik Bakken", company: "QuantumLeap", title: "Co-Founder & CTO", linkedin: "#", twitter: "#" },
-  { id: 8, name: "Mia Johansen", company: "SynthAI", title: "Founder", linkedin: "#", twitter: "#" },
-  { id: 9, name: "Lars Kristiansen", company: "DeepSense", title: "CEO", linkedin: "#", twitter: "#" },
-  { id: 10, name: "Nina Pedersen", company: "AIFlow Systems", title: "Co-Founder", linkedin: "#", twitter: "#" },
-  { id: 11, name: "Oskar Andersen", company: "RoboMind", title: "Founder & CEO", linkedin: "#", twitter: "#" },
-  { id: 12, name: "Thea Nilsen", company: "VisionCore", title: "CTO", linkedin: "#", twitter: "#" },
-  { id: 13, name: "Jakob Svendsen", company: "NLP Nordic", title: "Founder", linkedin: "#", twitter: "#" },
-  { id: 14, name: "Astrid Hansen", company: "SmartAgent AI", title: "CEO & Co-Founder", linkedin: "#", twitter: "#" },
-  { id: 15, name: "Kristian Moe", company: "InferAI", title: "Founder", linkedin: "#", twitter: "#" },
-  { id: 16, name: "Julie Eriksen", company: "ModelStack", title: "Co-Founder & CTO", linkedin: "#", twitter: "#" },
-  { id: 17, name: "Tor Holmen", company: "DataBridge", title: "CEO", linkedin: "#", twitter: "#" },
-  { id: 18, name: "Ida Solberg", company: "AutoML Labs", title: "Founder", linkedin: "#", twitter: "#" },
-  { id: 19, name: "Sander Lund", company: "NeuralOps", title: "Co-Founder", linkedin: "#", twitter: "#" },
-  { id: 20, name: "Hanna Dahl", company: "GenAI Studio", title: "Founder & CEO", linkedin: "#", twitter: "#" },
-];
+import Image from "next/image";
+import { residents } from "@/lib/residents.generated";
 
 export default function Residents() {
   return (
@@ -66,7 +44,7 @@ export default function Residents() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {residents.map((resident, index) => (
             <motion.article
-              key={resident.id}
+              key={resident.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -75,9 +53,12 @@ export default function Residents() {
             >
               {/* Avatar - Full width hero image */}
               <div className="relative aspect-square overflow-hidden">
-                <img
-                  src={`https://i.pravatar.cc/400?img=${resident.id + 10}`}
+                <Image
+                  src={resident.image}
                   alt={resident.name}
+                  width={800}
+                  height={800}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                   className="w-full h-full object-cover grayscale group-hover:scale-105 transition-all duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -96,26 +77,32 @@ export default function Residents() {
                 </p>
                 <p className="text-neutral-600 text-xs">{resident.title}</p>
                 {/* Social links */}
-                <div className="flex items-center gap-3 mt-2">
-                  <Link
-                    href={resident.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-600 hover:text-white transition-colors"
-                    aria-label={`${resident.name}'s LinkedIn`}
-                  >
-                    <SiLinkedin size={12} />
-                  </Link>
-                  <Link
-                    href={resident.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-600 hover:text-white transition-colors"
-                    aria-label={`${resident.name}'s Twitter`}
-                  >
-                    <SiX size={12} />
-                  </Link>
-                </div>
+                {(resident.linkedin || resident.twitter) && (
+                  <div className="flex items-center gap-3 mt-2">
+                    {resident.linkedin && (
+                      <Link
+                        href={resident.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-600 hover:text-white transition-colors"
+                        aria-label={`${resident.name}'s LinkedIn`}
+                      >
+                        <SiLinkedin size={12} />
+                      </Link>
+                    )}
+                    {resident.twitter && (
+                      <Link
+                        href={resident.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-600 hover:text-white transition-colors"
+                        aria-label={`${resident.name}'s Twitter`}
+                      >
+                        <SiX size={12} />
+                      </Link>
+                    )}
+                  </div>
+                )}
               </div>
             </motion.article>
           ))}
