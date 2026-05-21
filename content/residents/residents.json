@@ -30,5 +30,20 @@
     "linkedin": "https://www.linkedin.com/in/trondha",
     "twitter": "https://x.com/tronhauga",
     "image": "trond-hauga.jpg"
+  },
+  {
+    "name": "Kim Hovden Duong",
+    "company": "KA Labs",
+    "title": "CEO & Co-Founder",
+    "linkedin": "https://www.linkedin.com/in/kimhduo/",
+    "twitter": "https://x.com/kim_bim",
+    "image": "kim-hovden-duong.jpg"
+  },
+  {
+    "name": "Anders Rønning Dahlen",
+    "company": "KA Labs",
+    "title": "CTO & Co-Founder",
+    "linkedin": "https://www.linkedin.com/in/anders-dahlen-66a98984/",
+    "image": "anders-dahlen.jpeg"
   }
 ]
