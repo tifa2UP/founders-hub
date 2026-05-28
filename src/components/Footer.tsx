@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { MapPin, ArrowUpRight } from "lucide-react";
-import { SiLinkedin } from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa6";
 import { HiOutlineMail } from "react-icons/hi";
 
 export default function Footer() {
@@ -32,7 +32,7 @@ export default function Footer() {
                   className="w-12 h-12 border border-neutral-800 flex items-center justify-center text-neutral-500 hover:text-white hover:border-[#FF5722] transition-colors"
                   aria-label="LinkedIn"
                 >
-                  <SiLinkedin size={18} />
+                  <FaLinkedinIn size={18} />
                 </Link>
                 <Link
                   href="mailto:hello@foundershub.no"

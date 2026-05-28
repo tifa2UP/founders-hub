@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SiLinkedin, SiX } from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa6";
+import { SiX } from "react-icons/si";
 import Link from "next/link";
 import Image from "next/image";
 import { residents } from "@/lib/residents.generated";
@@ -83,7 +84,7 @@ export default function Residents() {
                         className="text-neutral-600 hover:text-white transition-colors"
                         aria-label={`${resident.name}'s LinkedIn`}
                       >
-                        <SiLinkedin size={12} />
+                        <FaLinkedinIn size={12} />
                       </Link>
                     )}
                     {resident.twitter && (

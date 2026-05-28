@@ -53,5 +53,19 @@
     "linkedin": "https://www.linkedin.com/in/oyvindmonsen/",
     "twitter": "https://x.com/_biing_bong_",
     "image": "oyvind-monsen.jpg"
+  },
+  {
+    "name": "Adrian Kjærran",
+    "company": "DataFabric",
+    "title": "CEO",
+    "linkedin": "https://www.linkedin.com/in/adrian-kjaerran/",
+    "image": "adrian-kjaerran.jpg"
+  },
+  {
+    "name": "Patrik Kjærran",
+    "company": "DataFabric",
+    "title": "CTO",
+    "linkedin": "https://www.linkedin.com/in/patrikkj/",
+    "image": "patrik-kjaerran.jpg"
   }
 ]
