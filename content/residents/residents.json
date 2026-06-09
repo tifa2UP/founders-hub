@@ -76,5 +76,19 @@
     "linkedin": "https://www.linkedin.com/in/bekken/",
     "twitter": "https://x.com/BenjaminBekken",
     "image": "benjamin-bekken.jpg"
+  },
+  {
+    "name": "Adrian Kjærran",
+    "company": "DataFabric",
+    "title": "CEO",
+    "linkedin": "https://www.linkedin.com/in/adrian-kjaerran/",
+    "image": "adrian-kjaerran.jpg"
+  },
+  {
+    "name": "Patrik Kjærran",
+    "company": "DataFabric",
+    "title": "CTO",
+    "linkedin": "https://www.linkedin.com/in/patrikkj/",
+    "image": "patrik-kjaerran.jpg"
   }
 ]
