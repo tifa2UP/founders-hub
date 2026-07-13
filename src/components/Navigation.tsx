@@ -5,9 +5,9 @@ import Link from "next/link";
 import { useState } from "react";
 
 const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Residents", href: "#residents" },
-  { label: "Join", href: "#join" },
+  { label: "About", href: "/#about" },
+  { label: "Residents", href: "/#residents" },
+  { label: "Join", href: "/#join" },
 ];
 
 export default function Navigation() {
@@ -108,7 +108,7 @@ export default function Navigation() {
                 transition={{ delay: 0.3 }}
               >
                 <Link
-                  href="#join"
+                  href="/#join"
                   onClick={() => setMobileMenuOpen(false)}
                   className="btn-primary mt-8"
                 >

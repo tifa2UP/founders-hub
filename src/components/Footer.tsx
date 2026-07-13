@@ -51,9 +51,9 @@ export default function Footer() {
               </h4>
               <ul className="space-y-4">
                 {[
-                  { label: "About", href: "#about" },
-                  { label: "Residents", href: "#residents" },
-                  { label: "Join Us", href: "#join" },
+                  { label: "About", href: "/#about" },
+                  { label: "Residents", href: "/#residents" },
+                  { label: "Join Us", href: "/#join" },
                 ].map((link) => (
                   <li key={link.label}>
                     <Link
@@ -90,7 +90,7 @@ export default function Footer() {
                 Ready?
               </h4>
               <Link
-                href="#join"
+                href="/#join"
                 className="inline-flex items-center gap-2 text-[#FF5722] font-heading font-bold text-sm uppercase tracking-wider hover:gap-4 transition-all"
               >
                 Apply Now

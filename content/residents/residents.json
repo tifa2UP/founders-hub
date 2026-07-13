@@ -1,5 +1,6 @@
 [
   {
+    "slug": "abdellatif-abdelfattah",
     "name": "Abdellatif Abdelfattah",
     "company": "Agentset",
     "title": "CEO & Co-Founder",
@@ -8,6 +9,7 @@
     "image": "abdellatif-abdelfattah.jpg"
   },
   {
+    "slug": "jens-kristoffersen",
     "name": "Jens Kristoffersen",
     "company": "Mimir",
     "title": "C3PO",
@@ -16,6 +18,7 @@
     "image": "jens-kristoffersen.jpg"
   },
   {
+    "slug": "kristian-elset-boe",
     "name": "Kristian Elset Bø",
     "company": "Homi",
     "title": "Founder",
@@ -24,6 +27,7 @@
     "image": "kristian-eboe.jpg"
   },
   {
+    "slug": "trond-hauga",
     "name": "Trond Haugå",
     "company": "Native",
     "title": "Cofounder & COO",
@@ -32,6 +36,7 @@
     "image": "trond-hauga.jpg"
   },
   {
+    "slug": "kim-hovden-duong",
     "name": "Kim Hovden Duong",
     "company": "KA Labs",
     "title": "CEO & Co-Founder",
@@ -40,6 +45,7 @@
     "image": "kim-hovden-duong.jpg"
   },
   {
+    "slug": "anders-ronning-dahlen",
     "name": "Anders Rønning Dahlen",
     "company": "KA Labs",
     "title": "CTO & Co-Founder",
@@ -47,6 +53,7 @@
     "image": "anders-dahlen.jpeg"
   },
   {
+    "slug": "oyvind-monsen",
     "name": "Øyvind Monsen",
     "company": "Mimir",
     "title": "CTO",
@@ -55,6 +62,7 @@
     "image": "oyvind-monsen.jpg"
   },
   {
+    "slug": "simon-archer-dreyer",
     "name": "Simon Archer Dreyer",
     "company": "Ask Poppy",
     "title": "Founder & CEO",
@@ -63,6 +71,7 @@
     "image": "simon-archer-dreyer.png"
   },
   {
+    "slug": "anders-falsen-habostad",
     "name": "Anders Falsen Habostad",
     "company": "Entyde",
     "title": "Founder",
@@ -70,6 +79,7 @@
     "image": "anders-habostad.jpeg"
   },
   {
+    "slug": "benjamin-bekken",
     "name": "Benjamin Bekken",
     "company": "Native",
     "title": "CEO & Co-founder",
@@ -78,6 +88,7 @@
     "image": "benjamin-bekken.jpg"
   },
   {
+    "slug": "adrian-kjaerran",
     "name": "Adrian Kjærran",
     "company": "DataFabric",
     "title": "CEO",
@@ -85,6 +96,7 @@
     "image": "adrian-kjaerran.jpg"
   },
   {
+    "slug": "patrik-kjaerran",
     "name": "Patrik Kjærran",
     "company": "DataFabric",
     "title": "CTO",

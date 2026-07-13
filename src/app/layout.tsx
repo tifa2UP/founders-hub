@@ -2,15 +2,23 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://founders-hub-five.vercel.app"),
-  title: "Founders Hub Oslo — For Those Who Ship",
+  metadataBase: new URL("https://www.founder-hub.com"),
+  title: {
+    default: "Founders Hub Oslo — For Those Who Ship",
+    template: "%s | Founders Hub Oslo",
+  },
   description:
     "Oslo's home for AI builders. Free office space and #1 community for the ones that ship fast. If you're building something world-class, you belong here.",
   keywords: ["AI", "startups", "Oslo", "founders", "community", "coworking"],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Founders Hub Oslo",
     description: "Norway's home for the AI founders building world-class companies.",
     type: "website",
+    url: "/",
+    siteName: "Founders Hub Oslo",
     images: [
       {
         url: "/og.png",
@@ -25,6 +33,10 @@ export const metadata: Metadata = {
     title: "Founders Hub Oslo",
     description: "Norway's home for the AI founders building world-class companies.",
     images: ["/og.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
