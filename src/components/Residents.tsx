@@ -48,7 +48,11 @@ export default function Residents() {
               className="border border-neutral-800 p-0 group hover:border-[#FF5722] transition-all overflow-hidden"
             >
               {/* Avatar - Full width hero image */}
-              <div className="relative aspect-square overflow-hidden">
+              <Link
+                href={`/residents/${resident.slug}`}
+                aria-label={`View ${resident.name}'s resident profile`}
+                className="relative block aspect-square overflow-hidden"
+              >
                 <Image
                   src={resident.image}
                   alt={resident.name}
@@ -61,12 +65,12 @@ export default function Residents() {
                 <span className="absolute top-3 left-3 font-mono text-xs text-white/50 group-hover:text-[#FF5722] transition-colors">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-              </div>
+              </Link>
 
               {/* Info */}
               <div className="p-4">
                 <h3 className="font-heading font-bold text-base text-white group-hover:text-[#FF5722] transition-colors">
-                  {resident.name}
+                  <Link href={`/residents/${resident.slug}`}>{resident.name}</Link>
                 </h3>
                 <p className="text-[#FF5722] text-sm font-heading">
                   {resident.company}
