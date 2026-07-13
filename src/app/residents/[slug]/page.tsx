@@ -23,7 +23,8 @@ function getResident(slug: string) {
 
 function getDescription(resident: (typeof residents)[number]) {
   return (
-    resident.bio ??
+    resident.tagline ??
+    resident.bio?.[0] ??
     `${resident.name} is ${resident.title} at ${resident.company} and a resident at Founders Hub Oslo.`
   );
 }
@@ -59,7 +60,7 @@ export async function generateMetadata({
           url: resident.image,
           width: 800,
           height: 800,
-          alt: resident.name,
+          alt: resident.imageAlt ?? resident.name,
         },
       ],
     },
@@ -89,29 +90,48 @@ export default async function ResidentPage({
     .filter((item) => item.slug !== resident.slug)
     .slice(0, 3);
   const description = getDescription(resident);
+  const profileUrl = `${SITE_URL}/residents/${resident.slug}`;
   const sameAs = [resident.linkedin, resident.twitter, resident.website].filter(
     (url): url is string => Boolean(url),
   );
-  const personJsonLd = {
+  const profileJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: resident.name,
-    url: `${SITE_URL}/residents/${resident.slug}`,
-    image: `${SITE_URL}${resident.image}`,
-    jobTitle: resident.title,
-    description,
-    worksFor: {
-      "@type": "Organization",
-      name: resident.company,
-      ...(resident.companyUrl ? { url: resident.companyUrl } : {}),
+    "@type": "ProfilePage",
+    url: profileUrl,
+    ...(resident.updatedAt ? { dateModified: resident.updatedAt } : {}),
+    mainEntity: {
+      "@type": "Person",
+      "@id": `${profileUrl}#person`,
+      name: resident.name,
+      ...(resident.alternateNames
+        ? { alternateName: resident.alternateNames }
+        : {}),
+      url: profileUrl,
+      image: `${SITE_URL}${resident.image}`,
+      jobTitle: resident.title,
+      description,
+      worksFor: {
+        "@type": "Organization",
+        name: resident.company,
+        ...(resident.companyUrl ? { url: resident.companyUrl } : {}),
+      },
+      memberOf: {
+        "@type": "Organization",
+        name: "Founders Hub Oslo",
+        url: SITE_URL,
+      },
+      ...(resident.focusAreas ? { knowsAbout: resident.focusAreas } : {}),
+      ...(sameAs.length > 0 ? { sameAs } : {}),
     },
-    memberOf: {
-      "@type": "Organization",
-      name: "Founders Hub Oslo",
-      url: SITE_URL,
-    },
-    ...(sameAs.length > 0 ? { sameAs } : {}),
   };
+
+  const hasAboutSection = Boolean(
+    resident.bio ||
+      resident.location ||
+      resident.residentSince ||
+      resident.focusAreas ||
+      resident.highlights,
+  );
 
   return (
     <main className="relative min-h-screen">
@@ -136,7 +156,7 @@ export default async function ResidentPage({
               <div className="relative aspect-square overflow-hidden border border-neutral-800 bg-neutral-900">
                 <Image
                   src={resident.image}
-                  alt={resident.name}
+                  alt={resident.imageAlt ?? resident.name}
                   fill
                   priority
                   sizes="(min-width: 1024px) 44vw, 100vw"
@@ -222,6 +242,149 @@ export default async function ResidentPage({
           </div>
         </header>
 
+        {hasAboutSection && (
+          <section className="border-b border-neutral-800 px-6 py-20 md:px-12 md:py-28">
+            <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:gap-24">
+              <div>
+                <span className="font-mono text-xs tracking-[0.3em] text-neutral-500 uppercase">
+                  The person
+                </span>
+                <h2 className="mt-3 font-display text-5xl leading-none md:text-6xl">
+                  About <em className="text-[#FF5722]">{resident.name.split(" ")[0]}</em>
+                </h2>
+
+                {resident.bio && (
+                  <div className="mt-9 max-w-3xl space-y-5 text-lg leading-relaxed text-neutral-400">
+                    {resident.bio.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <aside className="border-t border-neutral-800 lg:border-t-0 lg:border-l lg:pl-10">
+                {(resident.location || resident.residentSince || resident.highlights) && (
+                  <dl>
+                    {resident.location && (
+                      <div className="border-b border-neutral-800 py-5">
+                        <dt className="font-mono text-[0.68rem] tracking-[0.22em] text-neutral-600 uppercase">
+                          Location
+                        </dt>
+                        <dd className="mt-2 font-heading font-bold text-neutral-200">
+                          {resident.location}
+                        </dd>
+                      </div>
+                    )}
+                    {resident.residentSince && (
+                      <div className="border-b border-neutral-800 py-5">
+                        <dt className="font-mono text-[0.68rem] tracking-[0.22em] text-neutral-600 uppercase">
+                          Resident since
+                        </dt>
+                        <dd className="mt-2 font-heading font-bold text-neutral-200">
+                          {resident.residentSince}
+                        </dd>
+                      </div>
+                    )}
+                    {resident.highlights?.map((highlight) => (
+                      <div
+                        key={`${highlight.label}-${highlight.value}`}
+                        className="border-b border-neutral-800 py-5"
+                      >
+                        <dt className="font-mono text-[0.68rem] tracking-[0.22em] text-neutral-600 uppercase">
+                          {highlight.label}
+                        </dt>
+                        <dd className="mt-2 font-heading font-bold leading-snug text-neutral-200">
+                          {highlight.value}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+
+                {resident.focusAreas && (
+                  <div className="pt-7">
+                    <h3 className="font-mono text-[0.68rem] tracking-[0.22em] text-neutral-600 uppercase">
+                      Focus
+                    </h3>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {resident.focusAreas.map((area) => (
+                        <span
+                          key={area}
+                          className="border border-neutral-800 px-3 py-2 text-sm text-neutral-400"
+                        >
+                          {area}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </aside>
+            </div>
+          </section>
+        )}
+
+        {resident.projects && (
+          <section className="border-b border-neutral-800 px-6 py-20 md:px-12 md:py-28">
+            <div className="mx-auto max-w-7xl">
+              <span className="font-mono text-xs tracking-[0.3em] text-neutral-500 uppercase">
+                Selected work
+              </span>
+              <h2 className="mt-3 font-display text-5xl leading-none md:text-6xl">
+                Things <em className="text-[#FF5722]">built</em>
+              </h2>
+
+              <div className="mt-10 grid gap-px bg-neutral-800 md:grid-cols-2 xl:grid-cols-3">
+                {resident.projects.map((project) => {
+                  const content = (
+                    <>
+                      <div className="flex items-start justify-between gap-5">
+                        <div>
+                          <h3 className="font-heading text-xl font-bold transition-colors group-hover:text-[#FF5722]">
+                            {project.name}
+                          </h3>
+                          {project.role && (
+                            <p className="mt-1 font-mono text-[0.68rem] tracking-[0.18em] text-[#FF5722] uppercase">
+                              {project.role}
+                            </p>
+                          )}
+                        </div>
+                        {project.url && (
+                          <ArrowUpRight
+                            size={18}
+                            className="shrink-0 text-neutral-600 transition-colors group-hover:text-[#FF5722]"
+                          />
+                        )}
+                      </div>
+                      <p className="mt-8 leading-relaxed text-neutral-400">
+                        {project.description}
+                      </p>
+                    </>
+                  );
+
+                  return project.url ? (
+                    <a
+                      key={project.name}
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group min-h-64 bg-[#0a0a0a] p-7 transition-colors hover:bg-[#0d0d0d]"
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <article
+                      key={project.name}
+                      className="group min-h-64 bg-[#0a0a0a] p-7"
+                    >
+                      {content}
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
+
         {relatedResidents.length > 0 && (
           <section className="border-b border-neutral-800 px-6 py-20 md:px-12 md:py-28">
             <div className="mx-auto max-w-7xl">
@@ -280,7 +443,7 @@ export default async function ResidentPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(profileJsonLd).replace(/</g, "\\u003c"),
         }}
       />
     </main>

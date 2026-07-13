@@ -24,6 +24,59 @@
     "title": "Founder",
     "linkedin": "https://www.linkedin.com/in/kristianeboe",
     "twitter": "https://x.com/kristianeboe",
+    "website": "https://kristianeboe.me",
+    "companyUrl": "https://www.homi.so",
+    "alternateNames": [
+      "Kristian Elset Boe"
+    ],
+    "tagline": "Founder of Homi, a shared workspace for home search with AI that reads and compares the listings.",
+    "bio": [
+      "Kristian Elset Bø is the founder of Homi, a collaborative home-search workspace that replaces scattered listings, spreadsheets, and group chats with one place for people to search together.",
+      "He previously helped build Wordware (YC S24), co-founded Scales, and created SwipeStats. He is also building Hydra, a local-first desktop app that brings conversations and notifications into a people-centered graph for AI agents."
+    ],
+    "location": "Oslo · New York",
+    "focusAreas": [
+      "AI product development",
+      "Home search",
+      "Local-first software",
+      "Matching systems"
+    ],
+    "projects": [
+      {
+        "name": "Homi",
+        "role": "Founder",
+        "url": "https://www.homi.so",
+        "description": "A shared workspace for home search, with AI that reads and compares the listings."
+      },
+      {
+        "name": "SwipeStats",
+        "role": "Creator",
+        "url": "https://swipestats.io",
+        "description": "Analytics that help Tinder and Hinge users understand their dating app data."
+      },
+      {
+        "name": "Hydra",
+        "role": "Creator",
+        "url": "https://hydra.boe.ventures",
+        "description": "A local-first desktop app that brings conversations from different platforms into one people-centered graph for AI agents."
+      }
+    ],
+    "highlights": [
+      {
+        "label": "Previously",
+        "value": "Founding Engineer at Wordware (YC S24)"
+      },
+      {
+        "label": "Co-founded",
+        "value": "Scales (acquired)"
+      },
+      {
+        "label": "Education",
+        "value": "MSc in Artificial Intelligence, NTNU"
+      }
+    ],
+    "imageAlt": "Kristian Elset Bø, founder of Homi",
+    "updatedAt": "2026-07-13",
     "image": "kristian-eboe.jpg"
   },
   {
