@@ -35,7 +35,7 @@ export default function Footer() {
                   <SiLinkedin size={18} />
                 </Link>
                 <Link
-                  href="mailto:hello@foundershub.no"
+                  href="mailto:andreas@founder-hub.com"
                   className="w-12 h-12 border border-neutral-800 flex items-center justify-center text-neutral-500 hover:text-white hover:border-[#FF5722] transition-colors"
                   aria-label="Email"
                 >
