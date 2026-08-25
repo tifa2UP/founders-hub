@@ -95,7 +95,10 @@
     "title": "CEO & Co-Founder",
     "linkedin": "https://www.linkedin.com/in/kimhduo/",
     "twitter": "https://x.com/kim_bim",
-    "image": "kim-hovden-duong.jpg"
+    "image": "kim-hovden-duong.jpg", 
+    "tagline": "Building ka-labs.io - AI Agents for Cost Control",
+    "companyUrl": "https://ka-labs.io",
+    "residentSince": "2026"
   },
   {
     "slug": "anders-ronning-dahlen",
@@ -103,7 +106,10 @@
     "company": "KA Labs",
     "title": "CTO & Co-Founder",
     "linkedin": "https://www.linkedin.com/in/anders-dahlen-66a98984/",
-    "image": "anders-dahlen.jpeg"
+    "image": "anders-dahlen.jpeg", 
+    "tagline": "Building ka-labs.io - AI Agents for Cost Control",
+    "companyUrl": "https://ka-labs.io",
+    "residentSince": "2026"
   },
   {
     "slug": "oyvind-monsen",
