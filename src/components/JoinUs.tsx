@@ -180,7 +180,7 @@ export default function JoinUs() {
             sooner you&apos;re building with the best.
           </p>
           <Link
-            href="mailto:hello@foundershub.no?subject=Application"
+            href="mailto:andreas@founder-hub.com?subject=Application"
             className="btn-primary text-lg px-12 py-5"
           >
             Apply Now
