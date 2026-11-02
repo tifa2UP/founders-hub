@@ -14,6 +14,7 @@ export default function ApplyPage() {
   const [email, setEmail] = useState("");
   const [linkedin, setLinkedin] = useState("");
   const [notes, setNotes] = useState("");
+  const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<Status>({ kind: "idle" });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -24,7 +25,7 @@ export default function ApplyPage() {
       const res = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, linkedin, notes }),
+        body: JSON.stringify({ email, linkedin, notes, website }),
       });
 
       if (!res.ok) {
@@ -37,6 +38,7 @@ export default function ApplyPage() {
       setEmail("");
       setLinkedin("");
       setNotes("");
+      setWebsite("");
     } catch {
       setStatus({ kind: "error", message: "Network error. Try again." });
     }
@@ -94,6 +96,19 @@ export default function ApplyPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-8">
+              <div hidden aria-hidden="true">
+                <label>
+                  Leave this field blank
+                  <input
+                    type="text"
+                    name="website"
+                    autoComplete="off"
+                    tabIndex={-1}
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                  />
+                </label>
+              </div>
               <Field
                 label="Email"
                 required

@@ -9,6 +9,7 @@
     "prebuild": "node scripts/build-residents.mjs",
     "start": "next start",
     "lint": "eslint",
+    "test": "bun test",
     "residents:validate": "node scripts/build-residents.mjs --validate",
     "residents:build": "node scripts/build-residents.mjs"
   },

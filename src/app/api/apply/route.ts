@@ -1,13 +1,22 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
+import { isLinkedInUrl } from "@/lib/application-validation";
 
 export const runtime = "nodejs";
 
 const ApplicationSchema = z.object({
   email: z.email("Please enter a valid email address"),
-  linkedin: z.string().trim().max(500).optional().or(z.literal("")),
+  linkedin: z
+    .string()
+    .trim()
+    .max(500)
+    .refine((value) => value === "" || isLinkedInUrl(value), {
+      message: "Enter a LinkedIn profile or company URL (for example, https://www.linkedin.com/in/your-name) or leave it blank.",
+    })
+    .optional(),
   notes: z.string().trim().max(5000).optional().or(z.literal("")),
+  website: z.string().optional(),
 });
 
 function escapeHtml(value: string): string {
@@ -68,6 +77,18 @@ export async function POST(request: Request) {
     payload = await request.json();
   } catch {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+  }
+
+  // This field is hidden from people. A populated value is a bot signal; return
+  // the normal acknowledgement without notifying admins. Older clients omit it.
+  if (
+    typeof payload === "object" &&
+    payload !== null &&
+    "website" in payload &&
+    typeof payload.website === "string" &&
+    payload.website.trim() !== ""
+  ) {
+    return NextResponse.json({ ok: true });
   }
 
   const parsed = ApplicationSchema.safeParse(payload);
