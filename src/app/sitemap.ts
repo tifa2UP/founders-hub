@@ -1,7 +1,5 @@
 import type { MetadataRoute } from "next";
 
-import { residents } from "@/lib/residents.generated";
-
 const SITE_URL = "https://www.founder-hub.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -16,10 +14,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.7,
     },
-    ...residents.map((resident) => ({
-      url: `${SITE_URL}/residents/${resident.slug}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    })),
   ];
 }

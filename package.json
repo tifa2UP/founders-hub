@@ -4,14 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "predev": "node scripts/build-residents.mjs",
     "build": "next build",
-    "prebuild": "node scripts/build-residents.mjs",
     "start": "next start",
     "lint": "eslint",
-    "test": "bun test",
-    "residents:validate": "node scripts/build-residents.mjs --validate",
-    "residents:build": "node scripts/build-residents.mjs"
+    "test": "bun test"
   },
   "dependencies": {
     "framer-motion": "^12.31.0",

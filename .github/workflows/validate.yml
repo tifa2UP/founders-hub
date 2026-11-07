@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  validate-residents:
-    name: Validate residents
+  validate:
+    name: Test and build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,8 +23,5 @@ jobs:
       - name: Test application submission protections
         run: bun run test
 
-      - name: Validate residents.json and images
-        run: bun run residents:validate
-
-      - name: Build (resize images + generate residents file)
-        run: bun run residents:build
+      - name: Build
+        run: bun run build
