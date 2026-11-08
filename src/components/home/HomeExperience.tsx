@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { makeSun } from "./sunShader";
 import "./home.css";
@@ -108,7 +108,6 @@ const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default function HomeExperience() {
   const root = useRef<HTMLDivElement>(null);
-  const [copyLabel, setCopyLabel] = useState("Copy");
 
   useEffect(() => {
     const el = root.current;
@@ -399,15 +398,6 @@ export default function HomeExperience() {
     };
   }, []);
 
-  const copyEmail = () => {
-    const reset = () => window.setTimeout(() => setCopyLabel("Copy"), 1600);
-    navigator.clipboard
-      ?.writeText(EMAIL)
-      .then(() => setCopyLabel("Copied"))
-      .catch(() => setCopyLabel(EMAIL))
-      .finally(reset);
-  };
-
   return (
     <div className="fh-home" ref={root}>
       <div className="progress" id="progress" />
@@ -618,12 +608,7 @@ export default function HomeExperience() {
       <footer>
         <div className="foot mono" style={{ borderTop: "1px solid var(--line)" }}>
           <span>Ship fast. Build global.</span>
-          <span className="mail">
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            <button type="button" className="mono" onClick={copyEmail}>
-              {copyLabel}
-            </button>
-          </span>
+          <a href={`mailto:${EMAIL}`}>Contact</a>
           <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
             LinkedIn ↗
           </a>
