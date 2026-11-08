@@ -72,7 +72,7 @@
 .fh-home .net-svg .on{opacity:1}
 .fh-home .net-svg .pulse{fill:#FFE0B0}
 .fh-home .net-svg .co{fill:rgba(255,168,52,.75)}
-.fh-home #momentum{height:600svh}
+.fh-home #momentum{height:540svh}
 .fh-home #momentum .pin{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:24svh}
 .fh-home .tl-track{position:relative;display:flex;gap:clamp(48px,6vw,110px);padding-left:var(--gutter);will-change:transform;align-items:flex-end}
 .fh-home .ms{flex:none;width:clamp(240px,27vw,400px)}
