@@ -323,7 +323,23 @@ export default function HomeExperience() {
           pl.pulse.setAttribute("cy", String(C.y + (pt.y - C.y) * f));
         });
         $("glowC").setAttribute("opacity", String(clamp(k * 2)));
-        if (hubSun) hubSun.draw(time + 5, 44, 2);
+        // Map the system's centre (450,450 in viewBox units) onto the page.
+        const net = $<SVGSVGElement>("net");
+        const front = $<SVGSVGElement>("netFront");
+        const hub = $<HTMLCanvasElement>("hubSun");
+        const wrapBox = net.parentElement!.getBoundingClientRect();
+        const netBox = net.getBoundingClientRect();
+        const nl = netBox.left - wrapBox.left;
+        const nt = netBox.top - wrapBox.top;
+        const nw = netBox.width;
+        const nh = netBox.height;
+        const scale = Math.min(nw / 900, nh / 440);
+        const cx = nl + (nw - 900 * scale) / 2 + 450 * scale;
+        const cy = nt + (nh - 440 * scale) / 2 + (450 - 230) * scale;
+        const box = 160 * scale;
+        Object.assign(front.style, { left: `${nl}px`, top: `${nt}px`, width: `${nw}px`, height: `${nh}px` });
+        Object.assign(hub.style, { left: `${cx - box / 2}px`, top: `${cy - box / 2}px`, width: `${box}px`, height: `${box}px` });
+        if (hubSun) hubSun.draw(time + 5, 44 * scale, 2);
         $("cH").classList.toggle("on", k > 0.05);
         $("cP").classList.toggle("on", k > 0.3);
       }
@@ -461,36 +477,41 @@ export default function HomeExperience() {
               What starts in this hub moves all of Norway forward.
             </p>
           </div>
-          <svg
-            id="net"
-            viewBox="0 230 900 440"
-            role="img"
-            aria-label="Founders Hub at the centre of a system of founders, technology, research, industry, community, capital and policy"
-          >
-            <defs>
-              <radialGradient id="halo" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="rgba(251,138,34,.45)" />
-                <stop offset="100%" stopColor="rgba(251,138,34,0)" />
-              </radialGradient>
-              <filter id="neon" filterUnits="userSpaceOnUse" x="0" y="150" width="900" height="600">
-                <feGaussianBlur stdDeviation="2.4" result="b" />
-                <feMerge>
-                  <feMergeNode in="b" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-            <g id="orbits" />
-            <g id="nodesBack" />
-            <g id="edges" filter="url(#neon)" />
-            <g id="pulses" filter="url(#neon)" />
-            <circle cx="450" cy="450" r="170" fill="url(#halo)" id="glowC" opacity="0" />
-            <foreignObject x="370" y="370" width="160" height="160">
-              <canvas id="hubSun" style={{ width: 160, height: 160, display: "block" }} />
-            </foreignObject>
-            <g id="orbitsFront" />
-            <g id="nodes" />
-          </svg>
+          <div className="net-wrap">
+            <svg
+              id="net"
+              className="net-svg"
+              viewBox="0 230 900 440"
+              role="img"
+              aria-label="Founders Hub at the centre of a system of founders, technology, research, industry, community, capital and policy"
+            >
+              <defs>
+                <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="rgba(251,138,34,.45)" />
+                  <stop offset="100%" stopColor="rgba(251,138,34,0)" />
+                </radialGradient>
+                <filter id="neon" filterUnits="userSpaceOnUse" x="0" y="150" width="900" height="600">
+                  <feGaussianBlur stdDeviation="2.4" result="b" />
+                  <feMerge>
+                    <feMergeNode in="b" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <g id="orbits" />
+              <g id="nodesBack" />
+              <g id="edges" filter="url(#neon)" />
+              <g id="pulses" filter="url(#neon)" />
+              <circle cx="450" cy="450" r="170" fill="url(#halo)" id="glowC" opacity="0" />
+            </svg>
+            {/* The sun is a plain canvas layered between the back and front of the system,
+                so every browser (Safari included) puts it exactly at the centre. */}
+            <canvas id="hubSun" aria-hidden="true" />
+            <svg id="netFront" className="net-svg" viewBox="0 230 900 440" aria-hidden="true">
+              <g id="orbitsFront" />
+              <g id="nodes" />
+            </svg>
+          </div>
         </div>
       </section>
 
