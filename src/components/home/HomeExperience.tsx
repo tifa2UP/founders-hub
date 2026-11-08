@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { makeSun } from "./sunShader";
 import "./home.css";
@@ -108,7 +108,6 @@ const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default function HomeExperience() {
   const root = useRef<HTMLDivElement>(null);
-  const [copyLabel, setCopyLabel] = useState("Copy");
 
   useEffect(() => {
     const el = root.current;
@@ -118,7 +117,9 @@ export default function HomeExperience() {
     const timers = new Set<number>();
     const target = (node: Element) => {
       const r = node.getBoundingClientRect();
-      return clamp(-r.top / (r.height - window.innerHeight));
+      const span = r.height - window.innerHeight;
+      // A zero-height viewport (hidden tab or panel) would divide by zero and freeze the scenes.
+      return span > 0 ? clamp(-r.top / span) : 0;
     };
     const onScreen = (node: Element) => {
       const r = node.getBoundingClientRect();
@@ -217,12 +218,21 @@ export default function HomeExperience() {
     const msEls = Array.from(track.querySelectorAll<HTMLElement>(".ms"));
     const hock = (x: number) => Math.pow(clamp(x), 3.2);
     const TL = { W: 1, rise: 300, base: 400 };
-    const curve = (x0: number, x1: number) => {
+    // Point on the hockey stick at progress u (0..1). Over the last stretch the curve
+    // turns almost straight up, so the sun shoots out of the top of the frame like a blade.
+    const stick = (u: number) => {
+      const launch = clamp((u - 0.82) / 0.18);
+      const lift = launch * launch;
+      return {
+        x: u * TL.W + lift * 0.06 * window.innerWidth,
+        y: TL.base - TL.rise * Math.pow(Math.max(0, u), 3.2) - lift * 1.6 * window.innerHeight,
+      };
+    };
+    const curve = (uEnd: number) => {
       let d = "";
-      for (let i = 0; i <= 80; i++) {
-        const x = x0 + ((x1 - x0) * i) / 80;
-        const y = TL.base - TL.rise * hock(x / TL.W);
-        d += (i ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1);
+      for (let i = 0; i <= 120; i++) {
+        const p = stick((uEnd * i) / 120);
+        d += (i ? "L" : "M") + p.x.toFixed(1) + " " + p.y.toFixed(1);
       }
       return d;
     };
@@ -239,7 +249,7 @@ export default function HomeExperience() {
         const x = m.offsetLeft + m.offsetWidth * 0.1;
         m.style.transform = `translateY(${-TL.rise * hock(x / TL.W)}px)`;
       });
-      hsBase.setAttribute("d", curve(0, TL.W));
+      hsBase.setAttribute("d", curve(1));
     };
     if (!reduce) {
       layoutTL();
@@ -263,7 +273,7 @@ export default function HomeExperience() {
       const ease = reduce ? 1 : 1 - Math.pow(0.02, (dt / 1000) * 1.4);
       (Object.keys(S) as (keyof typeof S)[]).forEach((k) => {
         const t = reduce ? 1 : target(scenes[k]);
-        S[k] += (t - S[k]) * ease;
+        S[k] = Number.isFinite(S[k]) ? S[k] + (t - S[k]) * ease : t;
       });
       const time = reduce ? 20 : now / 1000;
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -323,7 +333,23 @@ export default function HomeExperience() {
           pl.pulse.setAttribute("cy", String(C.y + (pt.y - C.y) * f));
         });
         $("glowC").setAttribute("opacity", String(clamp(k * 2)));
-        if (hubSun) hubSun.draw(time + 5, 44, 2);
+        // Map the system's centre (450,450 in viewBox units) onto the page.
+        const net = $<SVGSVGElement>("net");
+        const front = $<SVGSVGElement>("netFront");
+        const hub = $<HTMLCanvasElement>("hubSun");
+        const wrapBox = net.parentElement!.getBoundingClientRect();
+        const netBox = net.getBoundingClientRect();
+        const nl = netBox.left - wrapBox.left;
+        const nt = netBox.top - wrapBox.top;
+        const nw = netBox.width;
+        const nh = netBox.height;
+        const scale = Math.min(nw / 900, nh / 440);
+        const cx = nl + (nw - 900 * scale) / 2 + 450 * scale;
+        const cy = nt + (nh - 440 * scale) / 2 + (450 - 230) * scale;
+        const box = 160 * scale;
+        Object.assign(front.style, { left: `${nl}px`, top: `${nt}px`, width: `${nw}px`, height: `${nh}px` });
+        Object.assign(hub.style, { left: `${cx - box / 2}px`, top: `${cy - box / 2}px`, width: `${box}px`, height: `${box}px` });
+        if (hubSun) hubSun.draw(time + 5, 44 * scale, 2);
         $("cH").classList.toggle("on", k > 0.05);
         $("cP").classList.toggle("on", k > 0.3);
       }
@@ -332,11 +358,10 @@ export default function HomeExperience() {
       if (!reduce) {
         const m = S.momentum;
         const dist = Math.max(0, TL.W - window.innerWidth + window.innerWidth * 0.1);
-        const hx = Math.max(8, m * TL.W);
-        const hy = TL.base - TL.rise * hock(hx / TL.W);
+        const head = stick(Math.max(m, 0.002));
         track.style.transform = `translate(${-m * dist}px, ${TL.rise * hock(m) * 0.92}px)`;
-        hsTrail.setAttribute("d", curve(0, hx));
-        hsHead.style.transform = `translate(${hx}px, ${hy}px)`;
+        hsTrail.setAttribute("d", curve(Math.max(m, 0.002)));
+        hsHead.style.transform = `translate(${head.x}px, ${head.y}px)`;
       }
       msDates.forEach((o) => {
         if (o.done) return;
@@ -372,15 +397,6 @@ export default function HomeExperience() {
       groups.forEach((g) => g.replaceChildren());
     };
   }, []);
-
-  const copyEmail = () => {
-    const reset = () => window.setTimeout(() => setCopyLabel("Copy"), 1600);
-    navigator.clipboard
-      ?.writeText(EMAIL)
-      .then(() => setCopyLabel("Copied"))
-      .catch(() => setCopyLabel(EMAIL))
-      .finally(reset);
-  };
 
   return (
     <div className="fh-home" ref={root}>
@@ -461,36 +477,41 @@ export default function HomeExperience() {
               What starts in this hub moves all of Norway forward.
             </p>
           </div>
-          <svg
-            id="net"
-            viewBox="0 230 900 440"
-            role="img"
-            aria-label="Founders Hub at the centre of a system of founders, technology, research, industry, community, capital and policy"
-          >
-            <defs>
-              <radialGradient id="halo" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="rgba(251,138,34,.45)" />
-                <stop offset="100%" stopColor="rgba(251,138,34,0)" />
-              </radialGradient>
-              <filter id="neon" filterUnits="userSpaceOnUse" x="0" y="150" width="900" height="600">
-                <feGaussianBlur stdDeviation="2.4" result="b" />
-                <feMerge>
-                  <feMergeNode in="b" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-            <g id="orbits" />
-            <g id="nodesBack" />
-            <g id="edges" filter="url(#neon)" />
-            <g id="pulses" filter="url(#neon)" />
-            <circle cx="450" cy="450" r="170" fill="url(#halo)" id="glowC" opacity="0" />
-            <foreignObject x="370" y="370" width="160" height="160">
-              <canvas id="hubSun" style={{ width: 160, height: 160, display: "block" }} />
-            </foreignObject>
-            <g id="orbitsFront" />
-            <g id="nodes" />
-          </svg>
+          <div className="net-wrap">
+            <svg
+              id="net"
+              className="net-svg"
+              viewBox="0 230 900 440"
+              role="img"
+              aria-label="Founders Hub at the centre of a system of founders, technology, research, industry, community, capital and policy"
+            >
+              <defs>
+                <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="rgba(251,138,34,.45)" />
+                  <stop offset="100%" stopColor="rgba(251,138,34,0)" />
+                </radialGradient>
+                <filter id="neon" filterUnits="userSpaceOnUse" x="0" y="150" width="900" height="600">
+                  <feGaussianBlur stdDeviation="2.4" result="b" />
+                  <feMerge>
+                    <feMergeNode in="b" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <g id="orbits" />
+              <g id="nodesBack" />
+              <g id="edges" filter="url(#neon)" />
+              <g id="pulses" filter="url(#neon)" />
+              <circle cx="450" cy="450" r="170" fill="url(#halo)" id="glowC" opacity="0" />
+            </svg>
+            {/* The sun is a plain canvas layered between the back and front of the system,
+                so every browser (Safari included) puts it exactly at the centre. */}
+            <canvas id="hubSun" aria-hidden="true" />
+            <svg id="netFront" className="net-svg" viewBox="0 230 900 440" aria-hidden="true">
+              <g id="orbitsFront" />
+              <g id="nodes" />
+            </svg>
+          </div>
         </div>
       </section>
 
@@ -587,12 +608,7 @@ export default function HomeExperience() {
       <footer>
         <div className="foot mono" style={{ borderTop: "1px solid var(--line)" }}>
           <span>Ship fast. Build global.</span>
-          <span className="mail">
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            <button type="button" className="mono" onClick={copyEmail}>
-              {copyLabel}
-            </button>
-          </span>
+          <a href={`mailto:${EMAIL}`}>Contact</a>
           <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
             LinkedIn ↗
           </a>
