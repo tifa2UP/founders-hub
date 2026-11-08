@@ -218,21 +218,12 @@ export default function HomeExperience() {
     const msEls = Array.from(track.querySelectorAll<HTMLElement>(".ms"));
     const hock = (x: number) => Math.pow(clamp(x), 3.2);
     const TL = { W: 1, rise: 300, base: 400 };
-    // Point on the hockey stick at progress u (0..1). Over the last stretch the curve
-    // turns almost straight up, so the sun shoots out of the top of the frame like a blade.
-    const stick = (u: number) => {
-      const launch = clamp((u - 0.82) / 0.18);
-      const lift = launch * launch;
-      return {
-        x: u * TL.W + lift * 0.06 * window.innerWidth,
-        y: TL.base - TL.rise * Math.pow(Math.max(0, u), 3.2) - lift * 1.6 * window.innerHeight,
-      };
-    };
-    const curve = (uEnd: number) => {
+    const curve = (x0: number, x1: number) => {
       let d = "";
-      for (let i = 0; i <= 120; i++) {
-        const p = stick((uEnd * i) / 120);
-        d += (i ? "L" : "M") + p.x.toFixed(1) + " " + p.y.toFixed(1);
+      for (let i = 0; i <= 80; i++) {
+        const x = x0 + ((x1 - x0) * i) / 80;
+        const y = TL.base - TL.rise * hock(x / TL.W);
+        d += (i ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1);
       }
       return d;
     };
@@ -249,7 +240,7 @@ export default function HomeExperience() {
         const x = m.offsetLeft + m.offsetWidth * 0.1;
         m.style.transform = `translateY(${-TL.rise * hock(x / TL.W)}px)`;
       });
-      hsBase.setAttribute("d", curve(1));
+      hsBase.setAttribute("d", curve(0, TL.W));
     };
     if (!reduce) {
       layoutTL();
@@ -358,10 +349,11 @@ export default function HomeExperience() {
       if (!reduce) {
         const m = S.momentum;
         const dist = Math.max(0, TL.W - window.innerWidth + window.innerWidth * 0.1);
-        const head = stick(Math.max(m, 0.002));
+        const hx = Math.max(8, m * TL.W);
+        const hy = TL.base - TL.rise * hock(hx / TL.W);
         track.style.transform = `translate(${-m * dist}px, ${TL.rise * hock(m) * 0.92}px)`;
-        hsTrail.setAttribute("d", curve(Math.max(m, 0.002)));
-        hsHead.style.transform = `translate(${head.x}px, ${head.y}px)`;
+        hsTrail.setAttribute("d", curve(0, hx));
+        hsHead.style.transform = `translate(${hx}px, ${hy}px)`;
       }
       msDates.forEach((o) => {
         if (o.done) return;
