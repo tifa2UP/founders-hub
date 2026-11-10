@@ -157,3 +157,4 @@
 
 @media (max-width:820px){ .fh-home #edges, .fh-home #pulses{filter:none} }
 .fh-home .big-sun, .fh-home .tl-track{will-change:transform}
+@media (max-width:820px){ .fh-home .nav ul{gap:20px} .fh-home .nav .nav-li{display:none} }
