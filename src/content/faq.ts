@@ -15,7 +15,7 @@ export const FAQ: Faq[] = [
   },
   {
     q: "What does it cost?",
-    a: "1,500 kr, the same for everyone. We take no equity.",
+    a: "1,500 kr per desk per month, the same for everyone. We take no equity.",
   },
   {
     q: "How do I apply?",
