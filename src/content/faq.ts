@@ -3,7 +3,7 @@ export type Faq = { q: string; a: string; link?: { label: string; href: string }
 export const FAQ: Faq[] = [
   {
     q: "What is Founders Hub?",
-    a: "A workspace on the top floor of Mesh Youngstorget in Oslo, with room for about 40 founders. It is a non-profit foundation, not an accelerator or a fund. Anders Mjåset and Trond Haugå started it, and the doors opened in January 2026.",
+    a: "A workspace on the top floor of Mesh Youngstorget in Oslo, with room for 25 founders. It is a non-profit foundation, not an accelerator or a fund. Anders Mjåset and Trond Haugå started it, and the doors opened in January 2026.",
   },
   {
     q: "Why does it exist?",
@@ -24,7 +24,7 @@ export const FAQ: Faq[] = [
   },
   {
     q: "How are founders selected?",
-    a: "There are about 40 seats, so most applicants do not get one. We look at what you have built so far and what you are trying to build.",
+    a: "There are 25 seats, so most applicants do not get one. We look at what you have built so far and what you are trying to build.",
   },
   {
     q: "Where is it?",
