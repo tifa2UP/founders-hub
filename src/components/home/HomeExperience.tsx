@@ -8,7 +8,7 @@ import { makeSun } from "./sunShader";
 import "./home.css";
 
 const CREED =
-  "Every generation gets one shift that rewrites everything. Ours is AI. So we bring Norway’s most ambitious builders under one roof, take nothing in return, and push each other to world class, so";
+  "Every generation gets one shift that rewrites everything. Ours is AI. We bring Norway’s most ambitious builders under one roof and take nothing in return, so";
 const CREED_ACCENT = "all of us move forward together.";
 
 const LINE_ONE = ["Norway", "has", "built", "industries", "before."];
@@ -337,7 +337,6 @@ export default function HomeExperience() {
         Object.assign(hub.style, { left: `${cx - box / 2}px`, top: `${cy - box / 2}px`, width: `${box}px`, height: `${box}px` });
         if (hubSun) hubSun.draw(time + 5, 44 * scale, 2);
         $("cH").classList.toggle("on", k > 0.05);
-        $("cP").classList.toggle("on", k > 0.3);
       }
 
       // 4. Momentum: the hockey stick
@@ -460,9 +459,6 @@ export default function HomeExperience() {
             <h2 className="reveal" id="cH">
               When the best meet, everyone accelerates.
             </h2>
-            <p className="reveal" id="cP">
-              What starts in this hub moves all of Norway forward.
-            </p>
           </div>
           <div className="net-wrap">
             <svg

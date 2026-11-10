@@ -8,14 +8,14 @@ export const metadata: Metadata = {
     template: "%s | Founders Hub Oslo",
   },
   description:
-    "Oslo's home for AI builders. Free office space and #1 community for the ones that ship fast. If you're building something world-class, you belong here.",
+    "Norway's home for AI founders building world-class companies. Three into Y Combinator in year one.",
   keywords: ["AI", "startups", "Oslo", "founders", "community", "coworking"],
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Founders Hub Oslo",
-    description: "Norway's home for the AI founders building world-class companies.",
+    description: "Norway's home for AI founders building world-class companies. Three into Y Combinator in year one.",
     type: "website",
     url: "/",
     siteName: "Founders Hub Oslo",
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Founders Hub — Oslo, Est. 2026",
+        alt: "Founders Hub, a sun rising over the horizon",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Founders Hub Oslo",
-    description: "Norway's home for the AI founders building world-class companies.",
+    description: "Norway's home for AI founders building world-class companies. Three into Y Combinator in year one.",
     images: ["/og.png"],
   },
   robots: {
