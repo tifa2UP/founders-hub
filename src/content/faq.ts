@@ -3,32 +3,32 @@ export type Faq = { q: string; a: string; link?: { label: string; href: string }
 export const FAQ: Faq[] = [
   {
     q: "What is Founders Hub?",
-    a: "A workspace and community in Oslo for Norway’s most ambitious AI founders. Selected founders work side by side at Mesh Youngstorget, share what they learn and hold each other to a world-class standard. Think of it as Olympiatoppen for founders: a place where the best train together. The doors opened in January 2026.",
+    a: "A workspace on the top floor of Mesh Youngstorget in Oslo, with room for about 40 founders. It is a non-profit foundation, not an accelerator or a fund. Anders Mjåset and Trond Haugå started it, and the doors opened in January 2026.",
   },
   {
     q: "Why does it exist?",
-    a: "Every generation gets one shift that rewrites everything, and ours is AI. Norway has built industries before. The next one will be built by a small number of exceptional teams, and they get better faster together than alone. We exist to give those teams a place, a network and partners, and we take nothing in return, so that what starts here moves all of Norway forward.",
+    a: "In Norway, the founders who aim highest tend to work alone. Elite athletes have Olympiatoppen, where the best train together and get better from it. Founders Hub is meant to be the same thing for people building companies.",
   },
   {
     q: "Who is it for?",
-    a: "Founders building AI companies with global ambition, and the builders who ship alongside them.",
+    a: "Founders building very ambitious companies. Many of them work with AI, but it is not a requirement.",
   },
   {
     q: "What does it cost?",
-    a: "Nothing. We take no equity and charge no fee.",
+    a: "1,500 kr, the same for everyone. We take no equity.",
   },
   {
     q: "How do I apply?",
-    a: "Send a short application with your email, your LinkedIn and a few lines about what you are building.",
+    a: "Fill in the form with your email, your LinkedIn and a few lines about what you are building.",
     link: { label: "Apply", href: "/apply" },
   },
   {
     q: "How are founders selected?",
-    a: "Few get in. We read every application and look at what you have shipped and how fast you move.",
+    a: "There are about 40 seats, so most applicants do not get one. We look at what you have built so far and what you are trying to build.",
   },
   {
     q: "Where is it?",
-    a: "At Mesh Youngstorget, in the centre of Oslo.",
+    a: "On the top floor of Mesh Youngstorget, in central Oslo.",
   },
   {
     q: "Who backs Founders Hub?",
@@ -36,12 +36,12 @@ export const FAQ: Faq[] = [
   },
   {
     q: "What have founders from the hub achieved?",
-    a: "In the first year, Ara, Audun and Native were accepted into Y Combinator, Benford raised €5M and Mimir raised $600k.",
+    a: "In the first year, three companies got into Y Combinator: Ara, Audun and Native. Benford raised €5M and Mimir raised $600k.",
     link: { label: "Read the news", href: "/news" },
   },
   {
     q: "How can my company become a partner?",
-    a: "Get in touch and we will set up a conversation.",
+    a: "Send us an email and we will find a time to talk.",
     link: { label: "Contact", href: "mailto:andreas@founder-hub.com" },
   },
 ];
