@@ -8,8 +8,8 @@ import { makeSun } from "./sunShader";
 import "./home.css";
 
 const CREED =
-  "Every generation gets one shift that rewrites everything. Ours is AI. So we bring Norway’s most ambitious builders under one roof, take nothing in return, and push each other to world class,";
-const CREED_ACCENT = "so all of us move forward together.";
+  "Every generation gets one shift that rewrites everything. Ours is AI. So we bring Norway’s most ambitious builders under one roof, take nothing in return, and push each other to world class, so";
+const CREED_ACCENT = "all of us move forward together.";
 
 const LINE_ONE = ["Norway", "has", "built", "industries", "before."];
 const LINE_TWO = ["The", "next", "one", "is", "rising", "now"];
@@ -31,7 +31,7 @@ const MILESTONES: {
   },
   {
     when: "Spring 2026",
-    title: "Reason Machines into Y Combinator.",
+    title: "Ara into Y Combinator.",
     source: { label: "Y Combinator", href: "https://www.ycombinator.com/companies/reason-machines" },
   },
   {
@@ -73,19 +73,6 @@ const MILESTONES: {
   { when: "Oct 2026", title: "Verdane and Knowit join." },
   { when: "Nov 2026", title: "Norway’s first physical AI hackathon.", note: "With Anthropic and Atech." },
   { when: "Next", title: "You", you: true },
-];
-
-const ROSTER = [
-  { hint: "Legal", w: 180 },
-  { hint: "Seafood", w: 130 },
-  { hint: "Hardware", w: 240 },
-  { hint: "Education", w: 150 },
-  { hint: "Small business", w: 210 },
-  { hint: "Sales", w: 120 },
-  { hint: "Manufacturing", w: 190 },
-  { hint: "Engineering", w: 260 },
-  { hint: "Consumer AI", w: 150 },
-  { hint: "Learning", w: 200 },
 ];
 
 const PARTNERS = [
@@ -200,6 +187,7 @@ export default function HomeExperience() {
         w: 0.00042 * Math.pow(92 / rx, 1.5),
         r: i === 0 ? 9 : 6.5 - i * 0.35,
         done: false,
+        behind: false,
       };
     });
     const setLine = (l: Element, a: { x: number; y: number }, b: { x: number; y: number }) => {
@@ -277,17 +265,21 @@ export default function HomeExperience() {
       const big = $("bigSun");
       big.style.transform = `translate(-50%, ${73 - p * 80 - exE * 70}%)`;
       big.style.opacity = String(1 - exE);
-      if (heroSun && onScreen(scenes.dawn)) heroSun.draw(time, big.clientWidth * 0.5 * 0.714, 1.25);
+      if (heroSun && onScreen(scenes.dawn)) heroSun.draw(time, big.clientWidth * 0.5 * 0.714, window.innerWidth < 820 ? 1 : 1.25);
       $("sky").style.opacity = String(clamp(p * 1.3) * (1 - ex * 0.85));
       $("lockup").style.opacity = String(1 - clamp(p * 6));
       $("cue").style.opacity = String(1 - clamp(p * 8));
+      if (onScreen(scenes.dawn)) {
       line1.forEach((w, i) => w.classList.toggle("on", p > 0.1 + i * 0.04 && p < 0.42));
       line2.forEach((w, i) => w.classList.toggle("on", p > 0.5 + i * 0.04 && p < 0.93));
+      }
 
       // 2. Creed lights up word by word
-      $("afterglow").style.opacity = String(1 - clamp(S.creed * 2.2));
-      const lit = Math.floor(clamp((S.creed - 0.06) * 1.25) * scrubWords.length);
-      scrubWords.forEach((s, i) => s.classList.toggle("lit", i < lit));
+      if (onScreen(scenes.creed)) {
+        $("afterglow").style.opacity = String(1 - clamp(S.creed * 2.2));
+        const lit = Math.floor(clamp((S.creed - 0.06) * 1.25) * scrubWords.length);
+        scrubWords.forEach((s, i) => s.classList.toggle("lit", i < lit));
+      }
 
       // 3. Solar system
       if (onScreen(scenes.connect)) {
@@ -314,7 +306,10 @@ export default function HomeExperience() {
             decode(pl.tx, pl.k.toUpperCase());
           }
           const behind = z < 0 && Math.abs(pt.x - C.x) < 70;
-          (behind ? $("nodesBack") : $("nodes")).appendChild(pl.g);
+          if (behind !== pl.behind) {
+            pl.behind = behind;
+            (behind ? $("nodesBack") : $("nodes")).appendChild(pl.g);
+          }
           setLine(pl.beam, C, pt);
           const f = (time * 0.5 + i * 0.17) % 1;
           const vis = on && k > 0.5 && !reduce && !behind;
@@ -346,7 +341,7 @@ export default function HomeExperience() {
       }
 
       // 4. Momentum: the hockey stick
-      if (!reduce) {
+      if (!reduce && onScreen(scenes.momentum)) {
         const m = S.momentum;
         const dist = Math.max(0, TL.W - window.innerWidth + window.innerWidth * 0.1);
         const hx = Math.max(8, m * TL.W);
@@ -364,7 +359,7 @@ export default function HomeExperience() {
         }
       });
 
-      // 5. Your move: the sun takes the screen
+      // 5. Build with us: the sun takes the screen
       const ap = S.apply;
       if (onScreen(scenes.apply)) {
         const cv = $<HTMLCanvasElement>("applySun");
@@ -537,30 +532,12 @@ export default function HomeExperience() {
         </div>
       </section>
 
-      {/* 5. Who's inside */}
-      <section className="inside wrap" id="inside">
-        <div className="head">
-          <h2>Who’s inside?</h2>
-          <p>You’ll meet them when you’re in.</p>
-        </div>
-        <div className="roster">
-          {ROSTER.map((r) => (
-            <span key={r.hint} className="bar mono" tabIndex={0} style={{ width: `min(${r.w}px, 42vw)` }}>
-              <span>{r.hint}</span>
-            </span>
-          ))}
-        </div>
-      </section>
-
-      {/* 6. Your move */}
+      {/* 5. Build with us */}
       <section className="scene" id="apply">
         <div className="pin">
           <canvas id="applySun" aria-hidden="true" />
           <div className="apply-copy" id="applyCopy">
-            <h2>
-              Your move
-              <i className="sun dot" style={{ background: "#0A0A0A", boxShadow: "none" }} />
-            </h2>
+            <h2>Build with us.</h2>
             <p>Few get in.</p>
             <Link className="apply-btn" href="/apply">
               Apply <span>→</span>
@@ -588,10 +565,6 @@ export default function HomeExperience() {
             <img src="/brand/support-aws.svg" alt="Amazon Web Services" className="aws" />
             <img src="/brand/support-microsoft.svg" alt="Microsoft" />
             <img src="/brand/support-anthropic.svg" alt="Anthropic" />
-            <span className="atech">
-              <img src="/brand/support-atech.png" alt="" />
-              Atech.dev
-            </span>
             <img src="/brand/support-aiven.svg" alt="Aiven" />
           </div>
         </div>
