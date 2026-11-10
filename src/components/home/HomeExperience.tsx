@@ -266,7 +266,8 @@ export default function HomeExperience() {
       big.style.transform = `translate(-50%, ${73 - p * 80 - exE * 70}%)`;
       big.style.opacity = String(1 - exE);
       if (heroSun && onScreen(scenes.dawn)) heroSun.draw(time, big.clientWidth * 0.5 * 0.714, window.innerWidth < 820 ? 1 : 1.25);
-      $("sky").style.opacity = String(clamp(p * 1.3) * (1 - ex * 0.85));
+      // The sky is fully dark by the time the scene unpins, so no edge shows against the creed.
+      $("sky").style.opacity = String(clamp(p * 1.3) * (1 - ex));
       $("lockup").style.opacity = String(1 - clamp(p * 6));
       $("cue").style.opacity = String(1 - clamp(p * 8));
       if (onScreen(scenes.dawn)) {
