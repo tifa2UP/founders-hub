@@ -7,9 +7,10 @@ import { useEffect, useRef } from "react";
 import { makeSun } from "./sunShader";
 import "./home.css";
 
-const CREED =
-  "Every generation gets one shift that rewrites everything. Ours is AI. We bring Norway’s most ambitious builders under one roof and take nothing in return, so";
-const CREED_ACCENT = "all of us move forward together.";
+const CREED_LEAD = "Elite athletes have Olympiatoppen. Founders have this.";
+const CREED_BODY =
+  "Forty of Norway’s most ambitious founders share one floor at Youngstorget. We take no equity. When one of them makes it,";
+const CREED_ACCENT = "all of us move forward.";
 
 const LINE_ONE = ["Norway", "has", "built", "industries", "before."];
 const LINE_TWO = ["The", "next", "one", "is", "rising", "now"];
@@ -85,10 +86,12 @@ const PARTNERS = [
 
 // Closest orbit = closest to the founders.
 const PLANETS = ["Founders", "Technology", "Research", "Industry", "Community", "Capital", "Policy"];
+// Where each planet rests on its orbit, in degrees (90 is nearest the viewer). Chosen by hand so
+// no label touches the sun or another label, and all of them fit a phone screen.
+const PLANET_ANGLES = [35, 215, 110, 300, 70, 250, 280];
 
 const LINKEDIN = "https://www.linkedin.com/company/foundershuboslo/";
 const EMAIL = "andreas@founder-hub.com";
-const GLYPHS = "01<>/\\_-+=*#:";
 const NS = "http://www.w3.org/2000/svg";
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -101,7 +104,6 @@ export default function HomeExperience() {
     if (!el) return;
     const $ = <T extends Element = HTMLElement>(id: string) => el.querySelector(`#${id}`) as T;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const timers = new Set<number>();
     const target = (node: Element) => {
       const r = node.getBoundingClientRect();
       const span = r.height - window.innerHeight;
@@ -113,28 +115,6 @@ export default function HomeExperience() {
       return r.bottom > 0 && r.top < window.innerHeight;
     };
 
-    function decode(node: Element, final: string) {
-      if (reduce) {
-        node.textContent = final;
-        return;
-      }
-      let f = 0;
-      const total = final.length * 2 + 8;
-      const t = window.setInterval(() => {
-        f++;
-        node.textContent = final
-          .split("")
-          .map((ch, i) => (ch === " " ? " " : i * 2 < f - 6 ? ch : GLYPHS[(Math.random() * GLYPHS.length) | 0]))
-          .join("");
-        if (f >= total) {
-          window.clearInterval(t);
-          timers.delete(t);
-          node.textContent = final;
-        }
-      }, 28);
-      timers.add(t);
-    }
-
     // Suns
     const heroSun = makeSun($<HTMLCanvasElement>("bigSun"));
     const applySun = makeSun($<HTMLCanvasElement>("applySun"));
@@ -143,7 +123,7 @@ export default function HomeExperience() {
     // Solar system
     const C = { x: 450, y: 450 };
     const TILT = 0.3;
-    const groups = ["orbits", "orbitsFront", "edges", "pulses", "nodes", "nodesBack"].map((id) => $(id));
+    const groups = ["orbits", "orbitsFront", "nodes", "nodesBack"].map((id) => $(id));
     const mk = (tag: string, cls?: string) => {
       const node = document.createElementNS(NS, tag) as SVGElement;
       if (cls) node.setAttribute("class", cls);
@@ -166,9 +146,6 @@ export default function HomeExperience() {
       }
       $("orbits").appendChild(orbit);
       $("orbitsFront").appendChild(front);
-      const beam = mk("line", "edge");
-      beam.style.opacity = "0";
-      $("edges").appendChild(beam);
       const g = mk("g", "cat");
       const dot = mk("circle", i === 0 ? "planet first" : "planet");
       const tx = mk("text");
@@ -176,27 +153,22 @@ export default function HomeExperience() {
       g.appendChild(dot);
       g.appendChild(tx);
       g.style.opacity = "0";
-      $("nodes").appendChild(g);
-      const pulse = mk("circle", "pulse");
-      pulse.setAttribute("r", "2.6");
-      pulse.style.opacity = "0";
-      $("pulses").appendChild(pulse);
-      return {
-        k, rx, ry, orbit, front, beam, g, dot, tx, pulse,
-        a: -Math.PI / 2 + i * 2.1,
-        w: 0.00042 * Math.pow(92 / rx, 1.5),
-        r: i === 0 ? 9 : 6.5 - i * 0.35,
-        done: false,
-        behind: false,
-      };
+      // The system is drawn once and then rests: every planet has a fixed place on its orbit.
+      const a = (PLANET_ANGLES[i] * Math.PI) / 180;
+      const pt = { x: C.x + Math.cos(a) * rx, y: C.y + Math.sin(a) * ry };
+      const z = Math.sin(a);
+      const depth = (z + 1) / 2;
+      const r = i === 0 ? 9 : 6.5 - i * 0.35;
+      dot.setAttribute("cx", String(pt.x));
+      dot.setAttribute("cy", String(pt.y));
+      dot.setAttribute("r", String(r * (0.75 + depth * 0.45)));
+      const left = pt.x < C.x;
+      tx.setAttribute("x", String(pt.x + (left ? -1 : 1) * (r + 10)));
+      tx.setAttribute("y", String(pt.y + 5));
+      if (left) tx.setAttribute("text-anchor", "end");
+      (z < 0 && Math.abs(pt.x - C.x) < 70 ? $("nodesBack") : $("nodes")).appendChild(g);
+      return { orbit, front, g, depth };
     });
-    const setLine = (l: Element, a: { x: number; y: number }, b: { x: number; y: number }) => {
-      l.setAttribute("x1", String(a.x));
-      l.setAttribute("y1", String(a.y));
-      l.setAttribute("x2", String(b.x));
-      l.setAttribute("y2", String(b.y));
-    };
-
     // Hockey-stick timeline
     const track = $("track");
     const hsBase = $("hsBase");
@@ -235,15 +207,15 @@ export default function HomeExperience() {
       window.addEventListener("resize", layoutTL);
       document.fonts?.ready.then(layoutTL);
     }
-    const msDates = msEls.map((m) => ({ m, when: m.querySelector<HTMLElement>(".when")!, done: false }));
 
     const line1 = Array.from($("line1").querySelectorAll(".w"));
     const line2 = Array.from($("line2").querySelectorAll(".w"));
-    const scrubWords = Array.from($("scrub").querySelectorAll("span"));
     const scenes = { dawn: $("dawn"), creed: $("creed"), connect: $("connect"), momentum: $("momentum"), apply: $("apply") };
-    const S = { dawn: 0, creed: 0, connect: 0, momentum: 0, apply: 0 };
+    const S = { dawn: 0, momentum: 0, apply: 0 };
     let last = performance.now();
-    let lastConnect = 0;
+    let creedOn = false;
+    let connectStart = 0;
+    let connectSettled = false;
     let raf = 0;
 
     const frame = (now: number) => {
@@ -275,51 +247,30 @@ export default function HomeExperience() {
       line2.forEach((w, i) => w.classList.toggle("on", p > 0.5 + i * 0.04 && p < 0.93));
       }
 
-      // 2. Creed lights up word by word
-      if (onScreen(scenes.creed)) {
-        $("afterglow").style.opacity = String(1 - clamp(S.creed * 2.2));
-        const lit = Math.floor(clamp((S.creed - 0.06) * 1.25) * scrubWords.length);
-        scrubWords.forEach((s, i) => s.classList.toggle("lit", i < lit));
+      // 2. Creed: still text that fades in once
+      if (!creedOn && (reduce || scenes.creed.getBoundingClientRect().top < window.innerHeight * 0.6)) {
+        creedOn = true;
+        $("creedCopy").classList.add("on");
       }
 
-      // 3. Solar system
+      // 3. Solar system: draws itself once, then rests
       if (onScreen(scenes.connect)) {
-        const k = S.connect;
-        const boost = reduce ? 0 : Math.abs(k - lastConnect) * 40;
-        lastConnect = k;
-        planets.forEach((pl, i) => {
-          if (!reduce) pl.a += dt * pl.w * (1 + boost);
-          const pt = { x: C.x + Math.cos(pl.a) * pl.rx, y: C.y + Math.sin(pl.a) * pl.ry };
-          const z = Math.sin(pl.a);
-          const depth = (z + 1) / 2;
-          const d = clamp((k - 0.04 - i * 0.06) / 0.16);
-          pl.orbit.style.strokeDashoffset = String(1 - d);
-          pl.front.style.strokeDashoffset = String(1 - d);
-          const on = d > 0.98;
-          pl.dot.setAttribute("cx", String(pt.x));
-          pl.dot.setAttribute("cy", String(pt.y));
-          pl.dot.setAttribute("r", String(pl.r * (0.75 + depth * 0.45)));
-          pl.tx.setAttribute("x", String(pt.x + pl.r + 10));
-          pl.tx.setAttribute("y", String(pt.y + 5));
-          pl.g.style.opacity = on ? String(0.4 + depth * 0.6) : "0";
-          if (on && !pl.done) {
-            pl.done = true;
-            decode(pl.tx, pl.k.toUpperCase());
-          }
-          const behind = z < 0 && Math.abs(pt.x - C.x) < 70;
-          if (behind !== pl.behind) {
-            pl.behind = behind;
-            (behind ? $("nodesBack") : $("nodes")).appendChild(pl.g);
-          }
-          setLine(pl.beam, C, pt);
-          const f = (time * 0.5 + i * 0.17) % 1;
-          const vis = on && k > 0.5 && !reduce && !behind;
-          pl.beam.style.opacity = vis ? String(0.12 + 0.18 * Math.max(0, Math.sin(time * 1.3 + i))) : "0";
-          pl.pulse.style.opacity = vis ? "1" : "0";
-          pl.pulse.setAttribute("cx", String(C.x + (pt.x - C.x) * f));
-          pl.pulse.setAttribute("cy", String(C.y + (pt.y - C.y) * f));
-        });
-        $("glowC").setAttribute("opacity", String(clamp(k * 2)));
+        if (!connectStart && (reduce || scenes.connect.getBoundingClientRect().top < window.innerHeight * 0.5)) {
+          connectStart = now;
+          $("cH").classList.add("on");
+        }
+        if (connectStart && !connectSettled) {
+          const k = reduce ? 1 : clamp((now - connectStart) / 2400);
+          planets.forEach((pl, i) => {
+            const d = clamp((k - i * 0.09) / 0.4);
+            const e = d * d * (3 - 2 * d);
+            pl.orbit.style.strokeDashoffset = String(1 - e);
+            pl.front.style.strokeDashoffset = String(1 - e);
+            pl.g.style.opacity = d > 0.98 ? String(0.6 + pl.depth * 0.4) : "0";
+          });
+          $("glowC").setAttribute("opacity", String(clamp(k * 2)));
+          connectSettled = k >= 1;
+        }
         // Map the system's centre (450,450 in viewBox units) onto the page.
         const net = $<SVGSVGElement>("net");
         const front = $<SVGSVGElement>("netFront");
@@ -337,7 +288,6 @@ export default function HomeExperience() {
         Object.assign(front.style, { left: `${nl}px`, top: `${nt}px`, width: `${nw}px`, height: `${nh}px` });
         Object.assign(hub.style, { left: `${cx - box / 2}px`, top: `${cy - box / 2}px`, width: `${box}px`, height: `${box}px` });
         if (hubSun) hubSun.draw(time + 5, 44 * scale, 2);
-        $("cH").classList.toggle("on", k > 0.05);
       }
 
       // 4. Momentum: the hockey stick
@@ -350,15 +300,6 @@ export default function HomeExperience() {
         hsTrail.setAttribute("d", curve(0, hx));
         hsHead.style.transform = `translate(${hx}px, ${hy}px)`;
       }
-      msDates.forEach((o) => {
-        if (o.done) return;
-        const r = o.m.getBoundingClientRect();
-        if (r.left < window.innerWidth * 0.9 && r.top < window.innerHeight && r.bottom > 0) {
-          o.done = true;
-          decode(o.when, o.when.dataset.s ?? o.when.textContent ?? "");
-        }
-      });
-
       // 5. Build with us: the sun takes the screen
       const ap = S.apply;
       if (onScreen(scenes.apply)) {
@@ -380,7 +321,6 @@ export default function HomeExperience() {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", layoutTL);
-      timers.forEach((t) => window.clearInterval(t));
       groups.forEach((g) => g.replaceChildren());
     };
   }, []);
@@ -438,17 +378,11 @@ export default function HomeExperience() {
 
       {/* 2. Creed */}
       <section className="scene" id="creed">
-        <div className="pin wrap">
-          <div className="afterglow" id="afterglow" aria-hidden="true" />
-          <p className="scrub" id="scrub">
-            {CREED.split(" ").map((w, i) => (
-              <span key={`c${i}`}>{w} </span>
-            ))}
-            {CREED_ACCENT.split(" ").map((w, i) => (
-              <span key={`a${i}`} className="accent">
-                {w}{" "}
-              </span>
-            ))}
+        <div className="afterglow" aria-hidden="true" />
+        <div className="wrap creed-copy reveal" id="creedCopy">
+          <p className="creed-lead">{CREED_LEAD}</p>
+          <p className="creed-body">
+            {CREED_BODY} <span className="accent">{CREED_ACCENT}</span>
           </p>
         </div>
       </section>
@@ -474,18 +408,9 @@ export default function HomeExperience() {
                   <stop offset="0%" stopColor="rgba(251,138,34,.45)" />
                   <stop offset="100%" stopColor="rgba(251,138,34,0)" />
                 </radialGradient>
-                <filter id="neon" filterUnits="userSpaceOnUse" x="0" y="150" width="900" height="600">
-                  <feGaussianBlur stdDeviation="2.4" result="b" />
-                  <feMerge>
-                    <feMergeNode in="b" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
               </defs>
               <g id="orbits" />
               <g id="nodesBack" />
-              <g id="edges" filter="url(#neon)" />
-              <g id="pulses" filter="url(#neon)" />
               <circle cx="450" cy="450" r="170" fill="url(#halo)" id="glowC" opacity="0" />
             </svg>
             {/* The sun is a plain canvas layered between the back and front of the system,
@@ -505,7 +430,7 @@ export default function HomeExperience() {
           <div className="tl-track" id="track">
             {MILESTONES.map((m) => (
               <div key={m.when + m.title} className={`ms${m.you ? " you" : ""}`}>
-                <span className="mono when" data-s={m.when}>
+                <span className="mono when">
                   {m.when}
                 </span>
                 <h3>
