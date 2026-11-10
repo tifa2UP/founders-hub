@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Apply",
+  title: "Apply for Residency",
   description:
-    "Apply for a seat at Founders Hub Oslo, a workspace for founders building very ambitious companies.",
+    "Apply to become a resident at Founders Hub Oslo, a workspace for founders building very ambitious companies.",
   alternates: {
     canonical: "/apply",
   },

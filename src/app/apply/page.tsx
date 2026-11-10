@@ -67,7 +67,7 @@ export default function ApplyPage() {
           <div className="flex items-center gap-6 mb-8">
             <div className="accent-bar" />
             <span className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
-              Apply for a seat
+              Apply for Residency
             </span>
           </div>
 
