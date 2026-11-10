@@ -11,7 +11,7 @@ import "./home.css";
 
 const CREED_LEAD = "Elite athletes have Olympiatoppen. Founders have this.";
 const CREED_BODY =
-  "Twenty-five of Norway’s most ambitious founders share one floor at Youngstorget. We take no equity. When one of them makes it,";
+  "Twenty-five of Norway’s most ambitious founders share one floor at Youngstorget. When one of them makes it,";
 const CREED_ACCENT = "all of us move forward.";
 
 const LINE_ONE = ["Norway", "has", "built", "industries", "before."];
@@ -247,7 +247,6 @@ export default function HomeExperience() {
       {/* 3. The numbers */}
       <section className="scene" id="facts">
         <div className="wrap reveal" data-once>
-          <h2>When the best meet, everyone accelerates.</h2>
           <div className="facts">
             {FACTS.map((f) => (
               <div key={f.label} className="fact">

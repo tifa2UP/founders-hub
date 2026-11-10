@@ -46,8 +46,7 @@
 .fh-home .creed-body{font-size:clamp(23px,2.6vw,42px);line-height:1.18;max-width:30ch;margin-top:clamp(28px,3.4vw,52px);color:rgba(242,239,234,.82)}
 .fh-home .creed-body .accent{color:var(--sun-edge)}
 .fh-home #facts{padding-block:12svh 14svh}
-.fh-home #facts h2{font-size:clamp(34px,4vw,64px);line-height:1;max-width:16ch}
-.fh-home .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,48px);margin-top:clamp(40px,6vw,96px)}
+.fh-home .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,48px)}
 .fh-home .fact{border-top:1px solid var(--line-strong);padding-top:22px}
 .fh-home .fact .n{font-family:var(--display);font-size:clamp(84px,11vw,184px);line-height:.86;letter-spacing:-.03em}
 .fh-home .fact .l{margin-top:18px;color:var(--muted);font-size:17px;max-width:24ch}
