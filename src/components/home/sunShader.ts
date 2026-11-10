@@ -7,30 +7,62 @@ float h(vec3 p){ p=fract(p*0.3183099+.1); p*=17.0; return fract(p.x*p.y*p.z*(p.x
 float n(vec3 x){ vec3 i=floor(x), f=fract(x); f=f*f*(3.0-2.0*f);
   return mix(mix(mix(h(i),h(i+vec3(1,0,0)),f.x),mix(h(i+vec3(0,1,0)),h(i+vec3(1,1,0)),f.x),f.y),
              mix(mix(h(i+vec3(0,0,1)),h(i+vec3(1,0,1)),f.x),mix(h(i+vec3(0,1,1)),h(i+vec3(1,1,1)),f.x),f.y),f.z); }
-float fbm(vec3 p){ float a=.5, s=0.; for(int i=0;i<5;i++){ s+=a*n(p); p*=2.03; a*=.5; } return s; }
+float fbm(vec3 p){ float a=.5, s=0.; for(int i=0;i<4;i++){ s+=a*n(p); p*=2.03; a*=.5; } return s; }
+vec3 h3(vec3 p){ return vec3(h(p), h(p+19.19), h(p+47.77)); }
+// Cellular noise: x = distance to the nearest cell centre, y = distance to the cell border.
+vec2 cell(vec3 x){ vec3 i=floor(x), f=fract(x); float d1=8., d2=8.;
+  for(int a=-1;a<=1;a++) for(int b=-1;b<=1;b++) for(int c=-1;c<=1;c++){
+    vec3 g=vec3(float(a),float(b),float(c)); vec3 r=g+h3(i+g)-f; float d=dot(r,r);
+    if(d<d1){ d2=d1; d1=d; } else if(d<d2){ d2=d; } }
+  d1=sqrt(d1); return vec2(d1, sqrt(d2)-d1); }
 void main(){
   vec2 uv=(gl_FragCoord.xy-uC)/uR; float r=length(uv);
-  vec3 core=vec3(.976,.263,.102), mid=vec3(.98,.388,.086), edge=vec3(1.,.659,.204), hot=vec3(1.,.86,.55);
+  vec3 deep=vec3(.78,.15,.05), core=vec3(.976,.263,.102), mid=vec3(.98,.41,.09), gold=vec3(1.,.659,.204), hot=vec3(1.,.88,.6);
+  float detail=smoothstep(40.,220.,uR);
+
+  // Corona: broad streamers, fine rays, prominences and a thin bright rim at the limb.
   float d=max(r-1.,0.);
-  float ang=atan(uv.y,uv.x);
-  float fl=fbm(vec3(cos(ang)*2.,sin(ang)*2.,uT*.12))*.7+.3;
-  float c=(exp(-d*7.)*.55*fl + exp(-d*2.4)*.16)*smoothstep(1.4,1.12,r);
-  vec4 cor=vec4(mix(edge,core,clamp(d*2.,0.,1.))*c,c);
+  vec2 dir=uv/max(r,1e-4);
+  float fade=smoothstep(1.4,1.1,r);
+  float st=fbm(vec3(dir*2.2,uT*.05));
+  float fine=n(vec3(dir*11.,uT*.09-d*1.5));
+  float glow=exp(-d*7.)*(.25+.75*st)*(.7+.3*fine)*.62+exp(-d*2.4)*.15*(.5+st);
+  float tong=max(fbm(vec3(dir*6.+d*4.,uT*.1))-.54,0.)*.7;
+  float fil=n(vec3(uv*26.+dir*d*30.,uT*.25));
+  float prom=tong>.002 ? (1.-smoothstep(tong*.15,tong,d))*(.3+.7*fil*fil) : 0.;
+  prom*=detail;
+  float rim=exp(-d*(26.+20.*fine))*.3;
+  vec3 ccol=mix(gold,core,clamp(d*2.2,0.,1.))*glow+mix(mid,core,clamp(d*8.,0.,1.))*prom*.5+gold*rim;
+  vec4 cor=vec4(ccol,clamp(glow+prom*.5+rim,0.,1.))*fade;
+
   if(r<1.){
     float z=sqrt(1.-r*r); vec3 p0=vec3(uv,z); float ra=uT*.045, cr=cos(ra), sr=sin(ra);
     vec3 p=vec3(p0.x*cr+p0.z*sr, p0.y, -p0.x*sr+p0.z*cr);
     vec3 q=p*3.2; float t=uT*.06;
+    // Slow plasma flow, then granulation: bright convection cells with dark lanes between them.
     float w=fbm(q+vec3(t,t*.7,-t));
-    float g=fbm(q*2.2+w*1.8+vec3(0.,0.,t*1.6));
-    float cells=fbm(p*14.+vec3(t*3.))*.5;
-    float b=g*.85+cells*.45;
-    vec3 base=mix(core,mid,smoothstep(.0,.55,r));
-    base=mix(base,edge,smoothstep(.5,1.,r));
-    vec3 col=base*(.72+b*.62);
-    col=mix(col,hot,smoothstep(.62,.95,b)*.35);
-    col*=mix(.8,1.05,pow(z,.35));
-    col+=hot*pow(1.-z,3.)*.18;
-    float aa=smoothstep(1.,.99,r);
+    float g=fbm(q*2.1+w*1.8+vec3(0.,0.,t*1.6));
+    vec2 ce=cell(p*34.+w*2.5+vec3(0.,0.,uT*.1));
+    float gran=(1.-smoothstep(0.,.95,ce.x))*.65+smoothstep(0.,.3,ce.y)*.35;
+    float tex=mix(g, g*.74+gran*.3, detail);
+    // Sunspots in two mid-latitude belts, each with a dark umbra and a softer penumbra.
+    float lat=abs(p.y);
+    float belt=smoothstep(.08,.2,lat)*smoothstep(.62,.42,lat);
+    float act=smoothstep(.6,.72,n(p*1.7+7.3))*belt*detail;
+    float sd=cell(p*4.2+3.1).x+(g-.5)*.12;
+    float pen=(1.-smoothstep(.1,.17,sd))*act, umb=(1.-smoothstep(.05,.09,sd))*act;
+    float fac=(1.-smoothstep(.15,.42,sd))*act*(1.-pen);
+    // Limb darkening: the edge is cooler and deeper red than the centre.
+    vec3 base=mix(deep,mid,smoothstep(0.,.5,z));
+    base=mix(base,gold,smoothstep(.45,1.,z)*.5);
+    vec3 col=mix(base*vec3(.84,.6,.5),base*1.34,tex);
+    col=mix(col,hot,smoothstep(.72,1.,tex)*.3);
+    col*=1.-.32*(1.-z);
+    col+=hot*fac*.16*(1.-z*.6);
+    col=mix(col,col*vec3(.6,.45,.42),pen*.75);
+    col=mix(col,vec3(.17,.04,.02),umb*.85);
+    col+=gold*pow(1.-z,6.)*.14;
+    float aa=smoothstep(1.,1.-1.5/uR,r);
     gl_FragColor=vec4(col,1.)*aa+cor*(1.-aa);
   } else {
     gl_FragColor=cor;
