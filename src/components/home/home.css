@@ -51,7 +51,6 @@
 .fh-home #connect .pin{display:grid;grid-template-columns:.8fr 1.4fr;align-items:center;gap:clamp(12px,3vw,48px)}
 .fh-home .connect-copy{position:relative;z-index:2}
 .fh-home .connect-copy h2{font-size:clamp(40px,5.2vw,88px);line-height:.95;max-width:12ch}
-.fh-home .connect-copy p{margin-top:26px;color:var(--muted);max-width:30ch;font-size:clamp(16px,1.3vw,19px)}
 .fh-home .reveal{opacity:0;transform:translateY(16px);filter:blur(6px);transition:opacity .6s,transform .8s cubic-bezier(.2,.7,.2,1),filter .6s}
 .fh-home .reveal.on{opacity:1;transform:none;filter:none}
 .fh-home .net-wrap{position:relative;min-width:0}
