@@ -1,0 +1,19 @@
+/* Plain text pages (FAQ, News). Builds on the .fh-home tokens and type. */
+.fh-page{display:flex;flex-direction:column}
+.fh-page main{flex:1;padding-top:clamp(120px,18vh,200px);padding-bottom:clamp(64px,10vh,120px);max-width:1180px;width:100%}
+.fh-page .page-label{color:var(--muted);display:block;margin-bottom:18px}
+.fh-page h1{font-size:clamp(44px,7vw,112px);line-height:.95;max-width:14ch;margin-bottom:clamp(48px,8vh,96px)}
+.fh-page .rows{list-style:none;border-top:1px solid var(--line)}
+.fh-page .rows > li, .fh-page .rows > div{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(16px,4vw,64px);padding:clamp(24px,3.4vh,40px) 0;border-bottom:1px solid var(--line)}
+.fh-page .rows h2{font-size:clamp(24px,2.4vw,36px);line-height:1.08}
+.fh-page .rows p, .fh-page .rows dd{color:#CFC8BE;font-size:clamp(16px,1.25vw,19px);max-width:56ch}
+.fh-page .rows a.inline{text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:3px;transition:text-decoration-color .25s}
+.fh-page .rows a.inline:hover{text-decoration-color:var(--paper)}
+.fh-page .news .when{color:var(--muted);display:block;margin-bottom:10px}
+.fh-page .news .src{display:inline-block;margin-top:14px;color:var(--muted);transition:color .25s}
+.fh-page .news .src:hover{color:var(--paper)}
+.fh-page .page-cta{margin-top:clamp(48px,8vh,96px)}
+@media (max-width:820px){
+  .fh-page .rows > li, .fh-page .rows > div{grid-template-columns:1fr;gap:12px}
+}
+.fh-page .apply-btn{margin-top:0;background:var(--paper);color:#0A0A0A}

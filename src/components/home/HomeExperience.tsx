@@ -4,6 +4,8 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
+import SiteFooter from "../site/SiteFooter";
+import { LINKEDIN } from "../site/links";
 import { makeSun } from "./sunShader";
 import "./home.css";
 
@@ -86,8 +88,6 @@ const PARTNERS = [
 // Closest orbit = closest to the founders.
 const PLANETS = ["Founders", "Technology", "Research", "Industry", "Community", "Capital", "Policy"];
 
-const LINKEDIN = "https://www.linkedin.com/company/foundershuboslo/";
-const EMAIL = "andreas@founder-hub.com";
 const GLYPHS = "01<>/\\_-+=*#:";
 const NS = "http://www.w3.org/2000/svg";
 
@@ -395,6 +395,12 @@ export default function HomeExperience() {
         </a>
         <ul className="mono">
           <li>
+            <Link href="/news">News</Link>
+          </li>
+          <li>
+            <Link href="/faq">FAQ</Link>
+          </li>
+          <li className="nav-li">
             <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>
@@ -571,16 +577,7 @@ export default function HomeExperience() {
         </div>
       </section>
 
-      <footer>
-        <div className="foot mono" style={{ borderTop: "1px solid var(--line)" }}>
-          <span>Ship fast. Build global.</span>
-          <a href={`mailto:${EMAIL}`}>Contact</a>
-          <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
-            LinkedIn ↗
-          </a>
-          <span>Mesh Youngstorget, Oslo</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
