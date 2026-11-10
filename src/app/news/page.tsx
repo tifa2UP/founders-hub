@@ -22,9 +22,11 @@ export default function NewsPage() {
             </div>
             <div>
               <p>{n.summary}</p>
-              <a className="mono src" href={n.source.href} target="_blank" rel="noopener noreferrer">
-                {n.source.label} ↗
-              </a>
+              {n.source && (
+                <a className="mono src" href={n.source.href} target="_blank" rel="noopener noreferrer">
+                  {n.source.label} ↗
+                </a>
+              )}
             </div>
           </li>
         ))}

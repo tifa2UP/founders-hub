@@ -2,11 +2,16 @@ export type NewsItem = {
   when: string;
   title: string;
   summary: string;
-  source: { label: string; href: string };
+  source?: { label: string; href: string };
 };
 
 // Newest first. Add new stories at the top.
 export const NEWS: NewsItem[] = [
+  {
+    when: "Nov 2026",
+    title: "Norway’s first physical AI hackathon",
+    summary: "Founders Hub hosts Norway’s first physical AI hackathon, together with Anthropic and Atech.",
+  },
   {
     when: "Autumn 2026",
     title: "Native joins Y Combinator",
@@ -42,7 +47,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     when: "23 Jun 2026",
-    title: "New head, and room for 40",
+    title: "New head, and 25 fixed seats",
     summary: "Andreas Staune-Mittet, a former professional cyclist, takes over as head of Founders Hub. The hub grows from 23 founders to 25 fixed seats and 15 flex desks.",
     source: {
       label: "Shifter",

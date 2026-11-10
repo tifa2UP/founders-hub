@@ -4,18 +4,18 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.founder-hub.com"),
   title: {
-    default: "Founders Hub Oslo — For Those Who Ship",
+    default: "Founders Hub Oslo — Olympiatoppen for founders",
     template: "%s | Founders Hub Oslo",
   },
   description:
-    "Norway's home for AI founders building world-class companies. Three into Y Combinator in year one.",
+    "A workspace in Oslo for founders building very ambitious companies. Three into Y Combinator in the first year.",
   keywords: ["AI", "startups", "Oslo", "founders", "community", "coworking"],
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Founders Hub Oslo",
-    description: "Norway's home for AI founders building world-class companies. Three into Y Combinator in year one.",
+    description: "A workspace in Oslo for founders building very ambitious companies. Three into Y Combinator in the first year.",
     type: "website",
     url: "/",
     siteName: "Founders Hub Oslo",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Founders Hub Oslo",
-    description: "Norway's home for AI founders building world-class companies. Three into Y Combinator in year one.",
+    description: "A workspace in Oslo for founders building very ambitious companies. Three into Y Combinator in the first year.",
     images: ["/og.png"],
   },
   robots: {

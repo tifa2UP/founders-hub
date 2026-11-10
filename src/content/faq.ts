@@ -3,7 +3,7 @@ export type Faq = { q: string; a: string; link?: { label: string; href: string }
 export const FAQ: Faq[] = [
   {
     q: "What is Founders Hub?",
-    a: "A workspace on the top floor of Mesh Youngstorget in Oslo, with room for 25 founders. It is a non-profit foundation, not an accelerator or a fund. Anders Mjåset and Trond Haugå started it, and the doors opened in January 2026.",
+    a: "A workspace on the top floor of Mesh Youngstorget in Oslo, with 25 fixed seats. The founders who work here are called residents. It is a non-profit foundation, not an accelerator or a fund. Anders Mjåset and Trond Haugå started it together with Erik Nymo Bohne and Mikael Steenbuch from Astar, and the doors opened in January 2026.",
   },
   {
     q: "Why does it exist?",
@@ -11,7 +11,7 @@ export const FAQ: Faq[] = [
   },
   {
     q: "Who is it for?",
-    a: "Founders building very ambitious companies. Many of them work with AI, but it is not a requirement.",
+    a: "Founders building very ambitious companies, in any industry. AI is opening up new ground in all of them, so many of the founders here build with it, but it is not a requirement.",
   },
   {
     q: "What does it cost?",
@@ -23,8 +23,8 @@ export const FAQ: Faq[] = [
     link: { label: "Apply", href: "/apply" },
   },
   {
-    q: "How are founders selected?",
-    a: "There are 25 seats, so most applicants do not get one. We look at what you have built so far and what you are trying to build.",
+    q: "How are residents selected?",
+    a: "There are 25 fixed seats, so most applicants do not get one. We look at what you have built so far and what you are trying to build.",
   },
   {
     q: "Where is it?",
@@ -35,7 +35,7 @@ export const FAQ: Faq[] = [
     a: "DNB, Verdane, Knowit, Amesto and Mesh Community are partners. We build with Google, AWS, Microsoft, Anthropic and Aiven.",
   },
   {
-    q: "What have founders from the hub achieved?",
+    q: "What have residents achieved?",
     a: "In the first year, three companies got into Y Combinator: Ara, Audun and Native. Benford raised €5M and Mimir raised $600k.",
     link: { label: "Read the news", href: "/news" },
   },
