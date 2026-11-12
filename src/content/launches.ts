@@ -63,7 +63,8 @@ export const LAUNCHES: Launch[] = [
   {
     company: "Mimir",
     what: "The AI agent that takes over customer service for online stores.",
-    on: "file",
-    href: "https://static.trymimir.com/Mimir_presanyasjonsfilm2_edit1.mp4_1080p.mp4",
+    on: "LinkedIn",
+    href: "https://www.linkedin.com/posts/jrgenhalse_today-were-proud-to-launch-mimir-fast-growing-ugcPost-7447932284625801217-HRCY/",
+    thumb: "https://media.licdn.com/dms/image/v2/D4E05AQFBZzO14ZINNg/videocover-high/B4EZ1xfC9zJUBY-/0/1775725463484?e=2147483647&v=beta&t=NrquGUJRQzFB3ER3YxQY-sjROyMTQXuHbQ41Kyv47MU",
   },
 ];
