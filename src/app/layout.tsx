@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { EMAIL, LINKEDIN } from "@/components/site/links";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -8,14 +9,14 @@ export const metadata: Metadata = {
     template: "%s | Founders Hub Oslo",
   },
   description:
-    "A workspace in Oslo for founders building very ambitious companies. Three into Y Combinator in the first year.",
-  keywords: ["AI", "startups", "Oslo", "founders", "community", "coworking"],
+    "A startup hub and workspace at Youngstorget in Oslo, for founders building very ambitious companies. Three into Y Combinator in the first year.",
+  keywords: ["startup hub", "Oslo", "founders", "workspace", "coworking", "startups", "Norway", "AI"],
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Founders Hub Oslo",
-    description: "A workspace in Oslo for founders building very ambitious companies. Three into Y Combinator in the first year.",
+    description: "A startup hub and workspace at Youngstorget in Oslo, for founders building very ambitious companies. Three into Y Combinator in the first year.",
     type: "website",
     url: "/",
     siteName: "Founders Hub Oslo",
@@ -31,13 +32,51 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Founders Hub Oslo",
-    description: "A workspace in Oslo for founders building very ambitious companies. Three into Y Combinator in the first year.",
+    description: "A startup hub and workspace at Youngstorget in Oslo, for founders building very ambitious companies. Three into Y Combinator in the first year.",
     images: ["/og.png"],
   },
   robots: {
     index: true,
     follow: true,
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.founder-hub.com/#organization",
+      name: "Founders Hub Oslo",
+      alternateName: "Founders Hub",
+      url: "https://www.founder-hub.com",
+      logo: "https://www.founder-hub.com/icon.png",
+      image: "https://www.founder-hub.com/og.png",
+      description:
+        "A non-profit startup hub and workspace at Youngstorget in Oslo, for founders building very ambitious companies.",
+      foundingDate: "2026-01",
+      email: EMAIL,
+      sameAs: [LINKEDIN],
+      address: {
+        "@type": "PostalAddress",
+        name: "Mesh Youngstorget",
+        addressLocality: "Oslo",
+        addressCountry: "NO",
+      },
+      founder: ["Anders Mjåset", "Trond Haugå", "Erik Nymo Bohne", "Mikael Steenbuch"].map((name) => ({
+        "@type": "Person",
+        name,
+      })),
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.founder-hub.com/#website",
+      url: "https://www.founder-hub.com",
+      name: "Founders Hub Oslo",
+      inLanguage: "en",
+      publisher: { "@id": "https://www.founder-hub.com/#organization" },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -55,7 +94,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="noise">{children}</body>
+      <body className="noise">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        {children}
+      </body>
     </html>
   );
 }

@@ -3,20 +3,32 @@ export type NewsItem = {
   title: string;
   summary: string;
   source?: { label: string; href: string };
+  // Path to a full story on this site.
+  story?: string;
 };
 
 // Newest first. Add new stories at the top.
 export const NEWS: NewsItem[] = [
   {
-    when: "Nov 2026",
-    title: "Norway’s first physical AI hackathon",
-    summary: "Founders Hub hosts Norway’s first physical AI hackathon, together with Anthropic and Atech.",
+    when: "5 Nov 2026",
+    title: "Five women win Norway’s first physical AI hackathon",
+    summary: "Fifty hand-picked NTNU students had four hours in Trondheim, with hardware from Atech and AI tools from Anthropic. Robot Sense won with a device that helps robots learn to feel what they touch.",
+    story: "/news/first-physical-ai-hackathon",
   },
   {
     when: "Autumn 2026",
     title: "Native joins Y Combinator",
     summary: "Native gets into Y Combinator’s Fall 2026 batch. It is the third company from the hub to be accepted this year.",
     source: { label: "Nordic 9", href: "https://nordic9.com/news/native-norway-joined-y-combinator-fall-2026/" },
+  },
+  {
+    when: "1 Oct 2026",
+    title: "Orgbrain acquires Tilura",
+    summary: "Orgbrain buys Tilura, the virtual data room company from the hub. The product continues as Orgbrain VDR.",
+    source: {
+      label: "Shifter",
+      href: "https://www.shifter.no/nyheter/orgbrain-kjoper-opp-founders-hub-selskap/477560",
+    },
   },
   {
     when: "22 Sep 2026",
@@ -28,12 +40,30 @@ export const NEWS: NewsItem[] = [
     },
   },
   {
+    when: "25 Aug 2026",
+    title: "An A on a master’s thesis written by AI",
+    summary: "Anders Rodem had an AI system write six master’s theses. Five passed and one got an A. The story ran in Aftenposten, DN and Universitetsavisa.",
+    source: {
+      label: "Aftenposten",
+      href: "https://www.aftenposten.no/norge/i/oE8aWK/fikk-a-paa-masteroppgave-skrevet-av-ki",
+    },
+  },
+  {
     when: "Aug 2026",
     title: "DNB joins Founders Hub",
     summary: "Norway’s largest bank becomes a partner, along with Amesto. “Perhaps a little un-Norwegian,” says the Shifter headline.",
     source: {
       label: "Shifter",
       href: "https://www.shifter.no/nyheter/dnb-gar-inn-i-founders-hub-det-er-kanskje-litt-unorsk/474817",
+    },
+  },
+  {
+    when: "9 Aug 2026",
+    title: "Noah, 22, leaves EY for Benford",
+    summary: "A summer job at EY was meant to be the start of a consulting career. Noah Syrdal quit when Benford offered him a job. DN writes about him in a piece on young people changing jobs.",
+    source: {
+      label: "DN",
+      href: "https://www.dn.no/arbeidsliv/arbeidsliv/konsulenter/utdanning/flere-unge-vil-bytte-jobb-noah-22-sa-opp-konsulentjobben/2-1-2022171",
     },
   },
   {
@@ -64,6 +94,15 @@ export const NEWS: NewsItem[] = [
     },
   },
   {
+    when: "13 Apr 2026",
+    title: "Daymaker’s pitch cakes in Inc. and Forbes",
+    summary: "William Lindholm, 20, sends personalised cakes to investors on behalf of founders. Inc., Forbes and Sifted have written about how he built the company with AI.",
+    source: {
+      label: "Inc.",
+      href: "https://www.inc.com/mariapaula-gonzalez/this-founder-used-ai-to-build-a-thriving-business-out-of-customized-cake-pitches/91325967",
+    },
+  },
+  {
     when: "6 Mar 2026",
     title: "Ara joins Y Combinator",
     summary: "Shifter writes about a golden age for Norwegian teams at Y Combinator and names Ara as one of three new ones. Ara is the first company from the hub to get in.",
@@ -71,6 +110,12 @@ export const NEWS: NewsItem[] = [
       label: "Shifter",
       href: "https://www.shifter.no/nyheter/gullalder-for-norske-team-pa-prestisjefylt-startupprogram-vi-er-inne-i-et-generasjonsskifte/456046",
     },
+  },
+  {
+    when: "16 Jan 2026",
+    title: "Podcast: the beginning of Founders Hub",
+    summary: "Anders Mjåset and Trond Haugå explain why they started Founders Hub, in the first episode of Astar’s podcast Til Ungdommen. Recorded at Slush in Helsinki, in Norwegian.",
+    source: { label: "Spotify", href: "https://open.spotify.com/episode/7EjPjdmNLCJydl0gH4rB0d" },
   },
   {
     when: "15 Nov 2025",

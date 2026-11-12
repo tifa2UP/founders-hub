@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 
+import Link from "next/link";
+
 import SitePage from "@/components/site/SitePage";
 import { NEWS } from "@/content/news";
 
 export const metadata: Metadata = {
-  title: "News",
+  title: "News: YC admissions and funding rounds",
   description:
     "News from Founders Hub Oslo: Y Combinator admissions, funding rounds and partners. Ara, Audun, Native, Benford, Mimir and DNB.",
   alternates: { canonical: "/news" },
@@ -22,6 +24,11 @@ export default function NewsPage() {
             </div>
             <div>
               <p>{n.summary}</p>
+              {n.story && (
+                <Link className="mono src" href={n.story}>
+                  Read the story →
+                </Link>
+              )}
               {n.source && (
                 <a className="mono src" href={n.source.href} target="_blank" rel="noopener noreferrer">
                   {n.source.label} ↗
