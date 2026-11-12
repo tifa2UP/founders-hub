@@ -14,7 +14,7 @@ const CREED_BODY =
 const CREED_ACCENT = "all of us move forward.";
 
 const LINE_ONE = ["Norway", "has", "built", "industries", "before."];
-const LINE_TWO = ["The", "next", "one", "is", "rising", "now"];
+const LINE_TWO = ["The", "next", "one", "is", "rising", "now."];
 
 const MILESTONES: {
   when: string;
@@ -55,7 +55,12 @@ const MILESTONES: {
     title: "Native into Y Combinator.",
     source: { label: "Nordic 9", href: "https://nordic9.com/news/native-norway-joined-y-combinator-fall-2026/" },
   },
-  { when: "Nov 2026", title: "Norway’s first physical AI hackathon.", note: "With Anthropic and Atech." },
+  {
+    when: "Nov 2026",
+    title: "Norway’s first physical AI hackathon.",
+    note: "With Anthropic and Atech.",
+    source: { label: "Read the story", href: "/news/first-physical-ai-hackathon" },
+  },
   { when: "Next", title: "You", you: true },
 ];
 
@@ -138,14 +143,20 @@ export default function HomeExperience() {
       $("sky").style.opacity = String(clamp(p * 1.3) * (1 - ex));
       $("lockup").style.opacity = String(1 - clamp(p * 6));
       $("cue").style.opacity = String(1 - clamp(p * 8));
+      // Skip stays until the scene is nearly over, then gets out of the way.
+      const skip = $("skip");
+      const skipOn = 1 - clamp((p - 0.82) / 0.1);
+      skip.style.opacity = String(skipOn);
+      skip.style.pointerEvents = skipOn > 0.2 ? "auto" : "none";
       if (onScreen(scenes.dawn)) {
       line1.forEach((w, i) => w.classList.toggle("on", p > 0.1 + i * 0.04 && p < 0.42));
-      line2.forEach((w, i) => w.classList.toggle("on", p > 0.5 + i * 0.04 && p < 0.93));
+      // The second line stays up and scrolls away with the scene, so the screen is never empty before the creed.
+      line2.forEach((w, i) => w.classList.toggle("on", p > 0.5 + i * 0.04));
       }
 
       // 2–4. Creed, numbers and timeline are still: each appears once when it scrolls into view.
       for (let i = once.length - 1; i >= 0; i--) {
-        if (reduce || once[i].getBoundingClientRect().top < window.innerHeight * 0.72) {
+        if (reduce || once[i].getBoundingClientRect().top < window.innerHeight * 0.84) {
           once[i].classList.add("on");
           once.splice(i, 1);
         }
@@ -210,6 +221,18 @@ export default function HomeExperience() {
           <div className="cue" id="cue">
             <span />
           </div>
+          <button
+            type="button"
+            className="mono skip"
+            id="skip"
+            onClick={() =>
+              document.getElementById("creed")?.scrollIntoView({
+                behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+              })
+            }
+          >
+            Skip intro ↓
+          </button>
           <h1 className="line" id="line1" aria-label="Norway has built industries before.">
             {LINE_ONE.map((w) => (
               <span key={w}>
@@ -218,12 +241,9 @@ export default function HomeExperience() {
             ))}
           </h1>
           <h1 className="line" id="line2" aria-label="The next one is rising now.">
-            {LINE_TWO.map((w, i) => (
+            {LINE_TWO.map((w) => (
               <span key={w}>
-                <span className="w">
-                  {w}
-                  {i === LINE_TWO.length - 1 && <i className="sun dot" />}
-                </span>{" "}
+                <span className="w">{w}</span>{" "}
               </span>
             ))}
           </h1>
@@ -277,11 +297,16 @@ export default function HomeExperience() {
                     {m.you && <i className="sun dot" />}
                   </h3>
                   {m.note && <p>{m.note}</p>}
-                  {m.source && (
-                    <a className="mono src" href={m.source.href} target="_blank" rel="noopener noreferrer">
-                      {m.source.label} ↗
-                    </a>
-                  )}
+                  {m.source &&
+                    (m.source.href.startsWith("/") ? (
+                      <Link className="mono src" href={m.source.href}>
+                        {m.source.label} →
+                      </Link>
+                    ) : (
+                      <a className="mono src" href={m.source.href} target="_blank" rel="noopener noreferrer">
+                        {m.source.label} ↗
+                      </a>
+                    ))}
                 </li>
               ))}
             </ol>

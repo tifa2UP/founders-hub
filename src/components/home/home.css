@@ -33,6 +33,8 @@
 .fh-home .lockup .sun{width:clamp(44px,5.4vw,84px);height:clamp(44px,5.4vw,84px);box-shadow:0 0 40px rgba(251,120,34,.5)}
 .fh-home .lockup b{font-family:var(--mono);font-weight:700;font-size:clamp(24px,4vw,58px);letter-spacing:.01em}
 .fh-home .cue{position:absolute;left:50%;top:calc(44% + 80px);transform:translateX(-50%)}
+.fh-home .skip{all:unset;position:absolute;right:var(--gutter);bottom:calc(26px + env(safe-area-inset-bottom,0px));z-index:3;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,239,234,.62);padding:8px 0;transition:color .25s}
+.fh-home .skip:hover{color:var(--paper)}
 .fh-home .cue span{display:block;width:1px;height:40px;background:linear-gradient(var(--sun-edge),transparent);animation:cue 2.2s ease-in-out infinite}
 @keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 .fh-home .line{position:absolute;left:var(--gutter);right:var(--gutter);top:18%;font-family:var(--display);font-size:clamp(46px,8.4vw,140px);line-height:.92;letter-spacing:-.02em;max-width:14ch;z-index:2}
