@@ -24,10 +24,10 @@ export default function SitePage({
         </Link>
         <ul className="mono">
           <li>
-            <Link href="/launches">Launches</Link>
+            <Link href="/news">News</Link>
           </li>
           <li>
-            <Link href="/news">News</Link>
+            <Link href="/launches">Launches</Link>
           </li>
           <li>
             <Link href="/faq">FAQ</Link>
