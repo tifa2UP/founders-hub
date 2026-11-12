@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 import SiteFooter from "../site/SiteFooter";
-import { LINKEDIN } from "../site/links";
 import { makeSun } from "./sunShader";
 import "./home.css";
 
@@ -185,18 +184,13 @@ export default function HomeExperience() {
         </a>
         <ul className="mono">
           <li>
-            <Link href="/launches">Launches</Link>
-          </li>
-          <li>
             <Link href="/news">News</Link>
           </li>
           <li>
-            <Link href="/faq">FAQ</Link>
+            <Link href="/launches">Launches</Link>
           </li>
-          <li className="nav-li">
-            <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
-              LinkedIn
-            </a>
+          <li>
+            <Link href="/faq">FAQ</Link>
           </li>
           <li>
             <Link href="/apply">Apply</Link>

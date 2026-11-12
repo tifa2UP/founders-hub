@@ -41,6 +41,13 @@ export const LAUNCHES: Launch[] = [
     thumb: "https://drive.google.com/thumbnail?id=1X9mVp2ZyJMUhCcHN6NadzMNLV5S63Wpv&sz=w960",
   },
   {
+    company: "Daymaker",
+    what: "Finds your prospects, reads their digital footprint and sends the one gift that gets you the meeting.",
+    on: "LinkedIn",
+    href: "https://www.linkedin.com/feed/update/urn:li:activity:7519005264386240512",
+    thumb: "https://media.licdn.com/dms/image/v2/D4E05AQEOWCOnQ8NDhg/videocover-high/B4EaFe3zFgGsBM-/0/1792593075218?e=2147483647&v=beta&t=eHvvSDzETR0DL6ic50x4wagQrC8ieuyoE-i5-1oR4iA",
+  },
+  {
     company: "Dagny",
     what: "The new Dagny: an interface for AI that builds itself around the work you are doing.",
     on: "X",
@@ -51,7 +58,7 @@ export const LAUNCHES: Launch[] = [
     what: "Leaving the oil fund to build real-time market intelligence for the salmon industry.",
     on: "LinkedIn",
     href: "https://www.linkedin.com/posts/thomas-joon-hetland_after-an-exciting-summer-at-norges-bank-investment-ugcPost-7517189155299151873-xTx4/",
-    thumb: "https://dms.licdn.com/playlist/vid/v2/D4E05AQF5o6xtGW_p4Q/thumbnail-with-play-button-overlay-high/B4EaFJrtTRG8C8-/0/1792237559271?e=2147483647&v=beta&t=8GrTjxNO5IdTcQziiPYr_5CjluftnS8k7MaYTYCWTwM",
+    thumb: "https://media.licdn.com/dms/image/v2/D4E05AQF5o6xtGW_p4Q/videocover-high/B4EaFJrtTRG8BU-/0/1792237559271?e=2147483647&v=beta&t=zyq60C_5sVLN52jcRWP862GKs-8Ow9_m639TORv1R_o",
   },
   {
     company: "Skriptr",
@@ -65,11 +72,5 @@ export const LAUNCHES: Launch[] = [
     what: "The AI agent that takes over customer service for online stores.",
     on: "file",
     href: "https://static.trymimir.com/Mimir_presanyasjonsfilm2_edit1.mp4_1080p.mp4",
-  },
-  {
-    company: "DealSharp",
-    what: "A flight simulator for negotiations, built for lawyers and M&A advisors.",
-    on: "file",
-    href: "https://www.dealsharp.ai/videos/flight-simulator-hd.mp4",
   },
 ];
