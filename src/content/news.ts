@@ -22,12 +22,30 @@ export const NEWS: NewsItem[] = [
     source: { label: "Nordic 9", href: "https://nordic9.com/news/native-norway-joined-y-combinator-fall-2026/" },
   },
   {
+    when: "1 Oct 2026",
+    title: "Orgbrain acquires Tilura",
+    summary: "Orgbrain buys Tilura, the virtual data room company from the hub. The product continues as Orgbrain VDR.",
+    source: {
+      label: "Shifter",
+      href: "https://www.shifter.no/nyheter/orgbrain-kjoper-opp-founders-hub-selskap/477560",
+    },
+  },
+  {
     when: "22 Sep 2026",
     title: "Benford raises €5M to rebuild financial audit",
     summary: "Benford is a licensed Norwegian audit firm that builds its own software. firstminute capital, Global Founders Capital and Sondo put in €5M before the company had turned one.",
     source: {
       label: "Tech.eu",
       href: "https://tech.eu/2026/09/22/benford-raises-eur5m-to-rebuild-financial-audit-from-the-ground-up/",
+    },
+  },
+  {
+    when: "25 Aug 2026",
+    title: "An A on a master’s thesis written by AI",
+    summary: "Anders Rodem had an AI system write six master’s theses. Five passed and one got an A. The story ran in Aftenposten, DN and Universitetsavisa.",
+    source: {
+      label: "Aftenposten",
+      href: "https://www.aftenposten.no/norge/i/oE8aWK/fikk-a-paa-masteroppgave-skrevet-av-ki",
     },
   },
   {
@@ -73,6 +91,15 @@ export const NEWS: NewsItem[] = [
     source: {
       label: "BeBeez",
       href: "https://bebeez.eu/2026/06/12/profitable-oslo-based-ai-startup-mimir-raises-e518-3k-pre-seed-to-automate-e-commerce-operations/",
+    },
+  },
+  {
+    when: "13 Apr 2026",
+    title: "Daymaker’s pitch cakes in Inc. and Forbes",
+    summary: "William Lindholm, 20, sends personalised cakes to investors on behalf of founders. Inc., Forbes and Sifted have written about how he built the company with AI.",
+    source: {
+      label: "Inc.",
+      href: "https://www.inc.com/mariapaula-gonzalez/this-founder-used-ai-to-build-a-thriving-business-out-of-customized-cake-pitches/91325967",
     },
   },
   {
