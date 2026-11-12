@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${SITE_URL}/companies`,
+      url: `${SITE_URL}/launches`,
       changeFrequency: "monthly",
       priority: 0.8,
     },

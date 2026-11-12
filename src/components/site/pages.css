@@ -31,19 +31,18 @@
 .fh-article .article .src{display:inline-block;margin-top:8px;color:var(--muted);transition:color .25s}
 .fh-article .article .src:hover{color:var(--paper)}
 
-/* Companies: one row per company, with its launch video, milestones and links. */
-.fh-page .companies .what{color:var(--muted);margin-top:10px;max-width:34ch}
-.fh-page .companies .video{position:relative;display:block;width:min(100%,360px);aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);margin-bottom:20px}
-.fh-page .companies .video img{width:100%;height:100%;object-fit:cover;opacity:.78;transition:opacity .3s,transform .6s cubic-bezier(.2,.7,.2,1)}
-.fh-page .companies .video:hover img{opacity:1;transform:scale(1.03)}
-.fh-page .companies .play{position:absolute;left:14px;bottom:14px;width:34px;height:34px;border-radius:50%;background:var(--sun-mid);box-shadow:0 0 18px var(--glow)}
-.fh-page .companies .play::after{content:"";position:absolute;left:13px;top:10px;border-left:11px solid #0A0A0A;border-top:7px solid transparent;border-bottom:7px solid transparent}
-.fh-page .companies .marks{list-style:none;margin-bottom:18px}
-.fh-page .companies .marks li{display:grid;grid-template-columns:9.5em 1fr;gap:12px;align-items:baseline;padding:5px 0;color:#CFC8BE;font-size:clamp(16px,1.25vw,19px)}
-.fh-page .companies .marks .when{color:var(--muted)}
-.fh-page .companies .links{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted)}
-.fh-page .companies .links a{transition:color .25s}
-.fh-page .companies .links a:hover{color:var(--paper)}
+/* Launches: a small grid of launch videos. */
+.fh-page .launches{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(40px,6vh,72px) clamp(24px,3vw,48px);border-top:1px solid var(--line);padding-top:clamp(28px,4vh,44px)}
+.fh-page .launches .frame{position:relative;display:block;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);background:#0C0B0A}
+.fh-page .launches video.frame{object-fit:cover}
+.fh-page .launches .frame img{width:100%;height:100%;object-fit:cover;opacity:.8;transition:opacity .3s,transform .6s cubic-bezier(.2,.7,.2,1)}
+.fh-page .launches a.frame:hover img{opacity:1;transform:scale(1.03)}
+.fh-page .launches .play{position:absolute;left:16px;bottom:16px;width:38px;height:38px;border-radius:50%;background:var(--sun-mid);box-shadow:0 0 18px var(--glow)}
+.fh-page .launches .play::after{content:"";position:absolute;left:15px;top:11px;border-left:12px solid #0A0A0A;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.fh-page .launches .meta{display:flex;justify-content:space-between;gap:16px;color:var(--muted);margin:16px 0 10px}
+.fh-page .launches h2{font-size:clamp(26px,2.6vw,40px);line-height:1.05}
+.fh-page .launches p{color:#CFC8BE;font-size:clamp(16px,1.25vw,19px);max-width:44ch;margin-top:8px}
 @media (max-width:820px){
-  .fh-page .companies .marks li{grid-template-columns:1fr;gap:2px}
+  .fh-page .launches{grid-template-columns:1fr}
 }
+.fh-page .launches .frame .name{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:clamp(40px,5vw,72px);letter-spacing:-.02em;background:radial-gradient(circle at 50% 120%,rgba(250,99,22,.28),transparent 62%)}
