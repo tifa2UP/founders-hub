@@ -14,7 +14,7 @@ const CREED_BODY =
 const CREED_ACCENT = "all of us move forward.";
 
 const LINE_ONE = ["Norway", "has", "built", "industries", "before."];
-const LINE_TWO = ["The", "next", "one", "is", "rising", "now"];
+const LINE_TWO = ["The", "next", "one", "is", "rising", "now."];
 
 const MILESTONES: {
   when: string;
@@ -55,7 +55,12 @@ const MILESTONES: {
     title: "Native into Y Combinator.",
     source: { label: "Nordic 9", href: "https://nordic9.com/news/native-norway-joined-y-combinator-fall-2026/" },
   },
-  { when: "Nov 2026", title: "Norway’s first physical AI hackathon.", note: "With Anthropic and Atech." },
+  {
+    when: "Nov 2026",
+    title: "Norway’s first physical AI hackathon.",
+    note: "With Anthropic and Atech.",
+    source: { label: "Read the story", href: "/news/first-physical-ai-hackathon" },
+  },
   { when: "Next", title: "You", you: true },
 ];
 
@@ -235,12 +240,9 @@ export default function HomeExperience() {
             ))}
           </h1>
           <h1 className="line" id="line2" aria-label="The next one is rising now.">
-            {LINE_TWO.map((w, i) => (
+            {LINE_TWO.map((w) => (
               <span key={w}>
-                <span className="w">
-                  {w}
-                  {i === LINE_TWO.length - 1 && <i className="sun dot" />}
-                </span>{" "}
+                <span className="w">{w}</span>{" "}
               </span>
             ))}
           </h1>
@@ -294,11 +296,16 @@ export default function HomeExperience() {
                     {m.you && <i className="sun dot" />}
                   </h3>
                   {m.note && <p>{m.note}</p>}
-                  {m.source && (
-                    <a className="mono src" href={m.source.href} target="_blank" rel="noopener noreferrer">
-                      {m.source.label} ↗
-                    </a>
-                  )}
+                  {m.source &&
+                    (m.source.href.startsWith("/") ? (
+                      <Link className="mono src" href={m.source.href}>
+                        {m.source.label} →
+                      </Link>
+                    ) : (
+                      <a className="mono src" href={m.source.href} target="_blank" rel="noopener noreferrer">
+                        {m.source.label} ↗
+                      </a>
+                    ))}
                 </li>
               ))}
             </ol>

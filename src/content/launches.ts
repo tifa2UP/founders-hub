@@ -54,13 +54,6 @@ export const LAUNCHES: Launch[] = [
     href: "https://x.com/einar_m/status/2118317994598178894",
   },
   {
-    company: "Tidepoint",
-    what: "Leaving the oil fund to build real-time market intelligence for the salmon industry.",
-    on: "LinkedIn",
-    href: "https://www.linkedin.com/posts/thomas-joon-hetland_after-an-exciting-summer-at-norges-bank-investment-ugcPost-7517189155299151873-xTx4/",
-    thumb: "https://media.licdn.com/dms/image/v2/D4E05AQF5o6xtGW_p4Q/videocover-high/B4EaFJrtTRG8BU-/0/1792237559271?e=2147483647&v=beta&t=zyq60C_5sVLN52jcRWP862GKs-8Ow9_m639TORv1R_o",
-  },
-  {
     company: "Skriptr",
     what: "The AI workspace for students, open to every student.",
     on: "YouTube",
