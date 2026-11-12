@@ -2,7 +2,7 @@ export type Launch = {
   company: string;
   what: string;
   // Where the video opens. "file" plays in place on this page.
-  on: "YouTube" | "X" | "LinkedIn" | "Y Combinator" | "file";
+  on: "YouTube" | "X" | "LinkedIn" | "file";
   href: string;
   // Still image shown before the video is opened. Without one, the company name is shown instead.
   thumb?: string;
@@ -36,8 +36,8 @@ export const LAUNCHES: Launch[] = [
   {
     company: "Audun",
     what: "Out of stealth: debt collection rebuilt from the ground up.",
-    on: "Y Combinator",
-    href: "https://www.ycombinator.com/launches/Sx3-audun-ai-native-debt-collection",
+    on: "LinkedIn",
+    href: "https://www.linkedin.com/posts/auduncollection_out-of-stealth-today-were-rebuilding-debt-activity-7497717618397614080-Pu0A",
     thumb: "https://drive.google.com/thumbnail?id=1X9mVp2ZyJMUhCcHN6NadzMNLV5S63Wpv&sz=w960",
   },
   {
@@ -45,6 +45,13 @@ export const LAUNCHES: Launch[] = [
     what: "The new Dagny: an interface for AI that builds itself around the work you are doing.",
     on: "X",
     href: "https://x.com/einar_m/status/2118317994598178894",
+  },
+  {
+    company: "Tidepoint",
+    what: "Leaving the oil fund to build real-time market intelligence for the salmon industry.",
+    on: "LinkedIn",
+    href: "https://www.linkedin.com/posts/thomas-joon-hetland_after-an-exciting-summer-at-norges-bank-investment-ugcPost-7517189155299151873-xTx4/",
+    thumb: "https://dms.licdn.com/playlist/vid/v2/D4E05AQF5o6xtGW_p4Q/thumbnail-with-play-button-overlay-high/B4EaFJrtTRG8C8-/0/1792237559271?e=2147483647&v=beta&t=8GrTjxNO5IdTcQziiPYr_5CjluftnS8k7MaYTYCWTwM",
   },
   {
     company: "Skriptr",
