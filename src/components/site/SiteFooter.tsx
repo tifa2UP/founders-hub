@@ -6,6 +6,7 @@ export default function SiteFooter() {
   return (
     <footer>
       <div className="foot mono" style={{ borderTop: "1px solid var(--line)" }}>
+        <Link href="/companies">Companies</Link>
         <Link href="/news">News</Link>
         <Link href="/faq">FAQ</Link>
         <a href={`mailto:${EMAIL}`}>Contact</a>
