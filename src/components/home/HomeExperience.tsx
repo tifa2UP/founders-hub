@@ -138,6 +138,11 @@ export default function HomeExperience() {
       $("sky").style.opacity = String(clamp(p * 1.3) * (1 - ex));
       $("lockup").style.opacity = String(1 - clamp(p * 6));
       $("cue").style.opacity = String(1 - clamp(p * 8));
+      // Skip stays until the scene is nearly over, then gets out of the way.
+      const skip = $("skip");
+      const skipOn = 1 - clamp((p - 0.82) / 0.1);
+      skip.style.opacity = String(skipOn);
+      skip.style.pointerEvents = skipOn > 0.2 ? "auto" : "none";
       if (onScreen(scenes.dawn)) {
       line1.forEach((w, i) => w.classList.toggle("on", p > 0.1 + i * 0.04 && p < 0.42));
       line2.forEach((w, i) => w.classList.toggle("on", p > 0.5 + i * 0.04 && p < 0.93));
@@ -210,6 +215,18 @@ export default function HomeExperience() {
           <div className="cue" id="cue">
             <span />
           </div>
+          <button
+            type="button"
+            className="mono skip"
+            id="skip"
+            onClick={() =>
+              document.getElementById("creed")?.scrollIntoView({
+                behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+              })
+            }
+          >
+            Skip intro ↓
+          </button>
           <h1 className="line" id="line1" aria-label="Norway has built industries before.">
             {LINE_ONE.map((w) => (
               <span key={w}>
