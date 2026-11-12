@@ -24,6 +24,9 @@ export default function SitePage({
         </Link>
         <ul className="mono">
           <li>
+            <Link href="/launches">Launches</Link>
+          </li>
+          <li>
             <Link href="/news">News</Link>
           </li>
           <li>

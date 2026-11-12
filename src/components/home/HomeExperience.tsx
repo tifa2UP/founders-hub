@@ -11,7 +11,7 @@ import "./home.css";
 
 const CREED_LEAD = "Elite athletes have Olympiatoppen. Founders have this.";
 const CREED_BODY =
-  "Twenty-five of Norway’s most ambitious founders share one floor at Youngstorget. When one of them makes it,";
+  "AI is rewriting every industry. Twenty-five of Norway’s most ambitious founders share one floor at Youngstorget to build what comes next. When one of them makes it,";
 const CREED_ACCENT = "all of us move forward.";
 
 const LINE_ONE = ["Norway", "has", "built", "industries", "before."];
@@ -184,6 +184,9 @@ export default function HomeExperience() {
           <b>FOUNDERS HUB</b>
         </a>
         <ul className="mono">
+          <li>
+            <Link href="/launches">Launches</Link>
+          </li>
           <li>
             <Link href="/news">News</Link>
           </li>
