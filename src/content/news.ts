@@ -73,6 +73,12 @@ export const NEWS: NewsItem[] = [
     },
   },
   {
+    when: "16 Jan 2026",
+    title: "Podcast: the beginning of Founders Hub",
+    summary: "Anders Mjåset and Trond Haugå explain why they started Founders Hub, in the first episode of Astar’s podcast Til Ungdommen. Recorded at Slush in Helsinki, in Norwegian.",
+    source: { label: "Spotify", href: "https://open.spotify.com/episode/7EjPjdmNLCJydl0gH4rB0d" },
+  },
+  {
     when: "15 Nov 2025",
     title: "An “Olympiatoppen” for founders",
     summary: "Finansavisen on the plan behind Founders Hub: Anders Mjåset and Trond Haugå want to do for founders what Olympiatoppen does for Norway’s elite athletes. The doors opened in January 2026.",

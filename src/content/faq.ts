@@ -8,6 +8,7 @@ export const FAQ: Faq[] = [
   {
     q: "Why does it exist?",
     a: "In Norway, the founders who aim highest tend to work alone. Elite athletes have Olympiatoppen, where the best train together and get better from it. Founders Hub is meant to be the same thing for people building companies.",
+    link: { label: "Hear Anders and Trond on why they started it (podcast, in Norwegian)", href: "https://open.spotify.com/episode/7EjPjdmNLCJydl0gH4rB0d" },
   },
   {
     q: "Who is it for?",
