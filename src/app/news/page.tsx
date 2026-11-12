@@ -4,7 +4,7 @@ import SitePage from "@/components/site/SitePage";
 import { NEWS } from "@/content/news";
 
 export const metadata: Metadata = {
-  title: "News",
+  title: "News: YC admissions and funding rounds",
   description:
     "News from Founders Hub Oslo: Y Combinator admissions, funding rounds and partners. Ara, Audun, Native, Benford, Mimir and DNB.",
   alternates: { canonical: "/news" },

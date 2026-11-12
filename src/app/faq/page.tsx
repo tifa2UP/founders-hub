@@ -7,7 +7,7 @@ import { FAQ } from "@/content/faq";
 export const metadata: Metadata = {
   title: "FAQ",
   description:
-    "What Founders Hub Oslo is, who it is for, what it costs and how to apply. For founders thinking about applying.",
+    "What Founders Hub Oslo is, who it is for, what a desk costs, where it is and how to apply for residency.",
   alternates: { canonical: "/faq" },
 };
 
