@@ -2,7 +2,7 @@ export type Launch = {
   company: string;
   what: string;
   // Where the video opens. "file" plays in place on this page.
-  on: "YouTube" | "X" | "LinkedIn" | "file";
+  on: "YouTube" | "X" | "LinkedIn" | "Y Combinator" | "file";
   href: string;
   // Still image shown before the video is opened. Without one, the company name is shown instead.
   thumb?: string;
@@ -36,8 +36,8 @@ export const LAUNCHES: Launch[] = [
   {
     company: "Audun",
     what: "Out of stealth: debt collection rebuilt from the ground up.",
-    on: "LinkedIn",
-    href: "https://www.linkedin.com/posts/auduncollection_out-of-stealth-today-were-rebuilding-debt-activity-7497717618397614080-Pu0A",
+    on: "Y Combinator",
+    href: "https://www.ycombinator.com/launches/Sx3-audun-ai-native-debt-collection",
     thumb: "https://drive.google.com/thumbnail?id=1X9mVp2ZyJMUhCcHN6NadzMNLV5S63Wpv&sz=w960",
   },
   {
