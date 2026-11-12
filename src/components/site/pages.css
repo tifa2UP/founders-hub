@@ -17,3 +17,16 @@
   .fh-page .rows > li, .fh-page .rows > div{grid-template-columns:1fr;gap:12px}
 }
 .fh-page .apply-btn{margin-top:0;background:var(--paper);color:#0A0A0A}
+
+/* Full news story: one readable column. */
+.fh-article h1{font-size:clamp(38px,5.4vw,84px);line-height:1;max-width:18ch;margin-bottom:clamp(32px,5vh,56px)}
+.fh-article .article{max-width:68ch;border-top:1px solid var(--line);padding-top:clamp(28px,4vh,44px)}
+.fh-article .article > p{color:#CFC8BE;font-size:clamp(17px,1.3vw,20px);line-height:1.6;margin-bottom:1.15em}
+.fh-article .article > p.lead{color:var(--paper);font-family:var(--display);font-size:clamp(24px,2.4vw,36px);line-height:1.18;letter-spacing:-.01em;margin-bottom:clamp(28px,4vh,44px)}
+.fh-article .article h2{font-size:clamp(28px,3vw,44px);line-height:1.05;margin:clamp(40px,6vh,64px) 0 18px}
+.fh-article .article blockquote{border-left:1px solid var(--sun-ring);padding-left:clamp(18px,2.4vw,28px);margin:clamp(24px,4vh,36px) 0}
+.fh-article .article blockquote p{font-family:var(--display);font-size:clamp(21px,1.9vw,28px);line-height:1.28;margin-bottom:.8em}
+.fh-article .article blockquote footer{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:0;background:none}
+.fh-article .article > p.note{color:var(--muted);font-size:11px;line-height:1.7;margin-top:clamp(40px,6vh,64px);padding-top:22px;border-top:1px solid var(--line)}
+.fh-article .article .src{display:inline-block;margin-top:8px;color:var(--muted);transition:color .25s}
+.fh-article .article .src:hover{color:var(--paper)}

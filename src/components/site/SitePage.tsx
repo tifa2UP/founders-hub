@@ -9,13 +9,15 @@ export default function SitePage({
   label,
   title,
   children,
+  variant,
 }: {
   label: string;
   title: string;
+  variant?: "article";
   children: React.ReactNode;
 }) {
   return (
-    <div className="fh-home fh-page">
+    <div className={`fh-home fh-page${variant ? ` fh-${variant}` : ""}`}>
       <header className="nav">
         <Link href="/" className="brand">
           <b>FOUNDERS HUB</b>

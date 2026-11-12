@@ -3,14 +3,17 @@ export type NewsItem = {
   title: string;
   summary: string;
   source?: { label: string; href: string };
+  // Path to a full story on this site.
+  story?: string;
 };
 
 // Newest first. Add new stories at the top.
 export const NEWS: NewsItem[] = [
   {
-    when: "Nov 2026",
-    title: "Norway’s first physical AI hackathon",
-    summary: "Founders Hub hosts Norway’s first physical AI hackathon, together with Anthropic and Atech.",
+    when: "5 Nov 2026",
+    title: "Five women win Norway’s first physical AI hackathon",
+    summary: "Fifty hand-picked NTNU students had four hours in Trondheim, with hardware from Atech and AI tools from Anthropic. Robot Sense won with a device that helps robots learn to feel what they touch.",
+    story: "/news/first-physical-ai-hackathon",
   },
   {
     when: "Autumn 2026",
@@ -34,6 +37,15 @@ export const NEWS: NewsItem[] = [
     source: {
       label: "Shifter",
       href: "https://www.shifter.no/nyheter/dnb-gar-inn-i-founders-hub-det-er-kanskje-litt-unorsk/474817",
+    },
+  },
+  {
+    when: "9 Aug 2026",
+    title: "Noah, 22, leaves EY for Benford",
+    summary: "A summer job at EY was meant to be the start of a consulting career. Noah Syrdal quit when Benford offered him a job. DN writes about him in a piece on young people changing jobs.",
+    source: {
+      label: "DN",
+      href: "https://www.dn.no/arbeidsliv/arbeidsliv/konsulenter/utdanning/flere-unge-vil-bytte-jobb-noah-22-sa-opp-konsulentjobben/2-1-2022171",
     },
   },
   {

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import Link from "next/link";
+
 import SitePage from "@/components/site/SitePage";
 import { NEWS } from "@/content/news";
 
@@ -22,6 +24,11 @@ export default function NewsPage() {
             </div>
             <div>
               <p>{n.summary}</p>
+              {n.story && (
+                <Link className="mono src" href={n.story}>
+                  Read the story →
+                </Link>
+              )}
               {n.source && (
                 <a className="mono src" href={n.source.href} target="_blank" rel="noopener noreferrer">
                   {n.source.label} ↗
