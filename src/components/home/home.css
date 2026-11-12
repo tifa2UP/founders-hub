@@ -133,7 +133,10 @@
 .fh-home .line{top:20%}
 }
 @media (prefers-reduced-motion:reduce){
-.fh-home .line .w, .fh-home .apply-copy, .fh-home .reveal{opacity:1;transform:none;filter:none;transition:none}
+.fh-home .apply-copy, .fh-home .reveal{opacity:1;transform:none;filter:none;transition:none}
+.fh-home .line .w{transform:none;filter:none;transition:none}
+.fh-home #dawn{height:100svh}
+.fh-home .skip{display:none}
 .fh-home .tl .hs-trail, .fh-home .tl .ms{transition:none}
 }
 .fh-home .progress{position:fixed;left:0;top:0;height:2px;background:var(--sun-edge);box-shadow:0 0 10px var(--glow);z-index:31;width:0}

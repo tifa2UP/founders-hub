@@ -124,7 +124,8 @@ export default function HomeExperience() {
       last = now;
       const ease = reduce ? 1 : 1 - Math.pow(0.02, (dt / 1000) * 1.4);
       (Object.keys(S) as (keyof typeof S)[]).forEach((k) => {
-        const t = reduce ? 1 : target(scenes[k]);
+        // Reduced motion: no scroll-driven scene. The sunrise holds one still frame (sun up, second line), the apply sun is full.
+        const t = reduce ? (k === "dawn" ? 0.72 : 1) : target(scenes[k]);
         S[k] = Number.isFinite(S[k]) ? S[k] + (t - S[k]) * ease : t;
       });
       const time = reduce ? 20 : now / 1000;
