@@ -150,12 +150,13 @@ export default function HomeExperience() {
       skip.style.pointerEvents = skipOn > 0.2 ? "auto" : "none";
       if (onScreen(scenes.dawn)) {
       line1.forEach((w, i) => w.classList.toggle("on", p > 0.1 + i * 0.04 && p < 0.42));
-      line2.forEach((w, i) => w.classList.toggle("on", p > 0.5 + i * 0.04 && p < 0.93));
+      // The second line stays up and scrolls away with the scene, so the screen is never empty before the creed.
+      line2.forEach((w, i) => w.classList.toggle("on", p > 0.5 + i * 0.04));
       }
 
       // 2–4. Creed, numbers and timeline are still: each appears once when it scrolls into view.
       for (let i = once.length - 1; i >= 0; i--) {
-        if (reduce || once[i].getBoundingClientRect().top < window.innerHeight * 0.72) {
+        if (reduce || once[i].getBoundingClientRect().top < window.innerHeight * 0.84) {
           once[i].classList.add("on");
           once.splice(i, 1);
         }
