@@ -15,7 +15,7 @@ export default function LaunchesPage() {
     <SitePage label="Launches" title="Launched from the hub.">
       <ul className="launches">
         {LAUNCHES.map((l) => (
-          <li key={l.company}>
+          <li key={l.href}>
             {l.on === "file" ? (
               <video className="frame" src={`${l.href}#t=1`} controls preload="metadata" playsInline />
             ) : (

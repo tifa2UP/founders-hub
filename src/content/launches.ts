@@ -21,6 +21,13 @@ export const LAUNCHES: Launch[] = [
   },
   {
     company: "Reason Machines",
+    what: "Launched Reason, its coding agent, in November 2026.",
+    on: "YouTube",
+    href: "https://youtu.be/LVRSTgnaexg",
+    thumb: "https://i.ytimg.com/vi/LVRSTgnaexg/hqdefault.jpg",
+  },
+  {
+    company: "Reason Machines",
     what: "Launched as Ara, the self-driving IDE, when it joined Y Combinator.",
     on: "YouTube",
     href: "https://youtu.be/6ASb9QW2QEw",
