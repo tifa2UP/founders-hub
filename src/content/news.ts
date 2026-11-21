@@ -40,6 +40,15 @@ export const NEWS: NewsItem[] = [
     },
   },
   {
+    when: "10 Sep 2026",
+    title: "FinansWatch on DNB and Amesto backing the hub",
+    summary: "The finance daily writes that DNB and Amesto have joined as partners, and that the money goes to connecting the founders more closely with international technology and investor circles.",
+    source: {
+      label: "FinansWatch",
+      href: "https://finanswatch.no/nyheter/bank/article19630158.ece",
+    },
+  },
+  {
     when: "25 Aug 2026",
     title: "An A on a master’s thesis written by AI",
     summary: "Anders Rodem had an AI system write six master’s theses. Five passed and one got an A. The story ran in Aftenposten, DN and Universitetsavisa.",
