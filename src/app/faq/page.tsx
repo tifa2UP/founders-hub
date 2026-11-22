@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description:
     "What Founders Hub Oslo is, who it is for, what a desk costs, where it is and how to apply for residency.",
   alternates: { canonical: "/faq" },
+  openGraph: { title: "Founders Hub Oslo: questions, answered", description: "What Founders Hub Oslo is, who it is for, what a desk costs, where it is and how to apply for residency.", url: "/faq" },
+  twitter: { card: "summary_large_image", title: "Founders Hub Oslo: questions, answered", description: "What Founders Hub Oslo is, who it is for, what a desk costs, where it is and how to apply for residency." },
 };
 
 const jsonLd = {

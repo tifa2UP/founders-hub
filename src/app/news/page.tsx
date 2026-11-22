@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   description:
     "News from Founders Hub Oslo: Y Combinator admissions, funding rounds and partners. Ara, Audun, Native, Benford, Mimir and DNB.",
   alternates: { canonical: "/news" },
+  openGraph: { title: "News from Founders Hub Oslo", description: "News from Founders Hub Oslo: Y Combinator admissions, funding rounds and partners. Ara, Audun, Native, Benford, Mimir and DNB.", url: "/news" },
+  twitter: { card: "summary_large_image", title: "News from Founders Hub Oslo", description: "News from Founders Hub Oslo: Y Combinator admissions, funding rounds and partners. Ara, Audun, Native, Benford, Mimir and DNB." },
 };
 
 export default function NewsPage() {

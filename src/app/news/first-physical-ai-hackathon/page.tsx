@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   description: LEAD,
   alternates: { canonical: PATH },
   openGraph: { title: TITLE, description: LEAD, type: "article", url: PATH, publishedTime: "2026-11-09" },
+  twitter: { card: "summary_large_image", title: TITLE, description: LEAD },
 };
 
 const jsonLd = {
