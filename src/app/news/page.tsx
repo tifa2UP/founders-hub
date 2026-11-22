@@ -22,7 +22,17 @@ export default function NewsPage() {
           <li key={n.title}>
             <div>
               <span className="mono when">{n.when}</span>
-              <h2>{n.title}</h2>
+              <h2>
+                {n.story ? (
+                  <Link href={n.story}>{n.title}</Link>
+                ) : n.source ? (
+                  <a href={n.source.href} target="_blank" rel="noopener noreferrer">
+                    {n.title}
+                  </a>
+                ) : (
+                  n.title
+                )}
+              </h2>
             </div>
             <div>
               <p>{n.summary}</p>
