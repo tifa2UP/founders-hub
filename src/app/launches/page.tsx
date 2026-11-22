@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   title: "Launches",
   description: "Launch videos made by companies at Founders Hub Oslo. A short selection of the ones that travelled furthest.",
   alternates: { canonical: "/launches" },
+  openGraph: { title: "Launches from Founders Hub Oslo", description: "Launch videos made by companies at Founders Hub Oslo. A short selection of the ones that travelled furthest.", url: "/launches" },
+  twitter: { card: "summary_large_image", title: "Launches from Founders Hub Oslo", description: "Launch videos made by companies at Founders Hub Oslo. A short selection of the ones that travelled furthest." },
 };
 
 export default function LaunchesPage() {
